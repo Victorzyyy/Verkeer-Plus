@@ -57,7 +57,7 @@ export default function HighwayCanvas() {
         x: right ? -100 : W + 100,
         y: laneY(laneIdx),
         speed: (right ? 1 : -1) * (1.5 + Math.random() * 3) * depth,
-        length: (20 + Math.random() * 40) * depth,
+        length: (35 + Math.random() * 50) * depth,
         color: makeColor(false),
         laneIdx,
         depth,
@@ -76,17 +76,30 @@ export default function HighwayCanvas() {
     function drawRoad() {
       const grad = ctx!.createLinearGradient(0, roadY - roadHeight, 0, roadY + roadHeight)
       grad.addColorStop(0, 'rgba(0,0,0,0)')
-      grad.addColorStop(0.3, 'rgba(14,13,11,0.85)')
-      grad.addColorStop(0.7, 'rgba(14,13,11,0.85)')
+      grad.addColorStop(0.3, 'rgba(46,44,40,0.9)')
+      grad.addColorStop(0.7, 'rgba(46,44,40,0.9)')
       grad.addColorStop(1, 'rgba(0,0,0,0)')
       ctx!.fillStyle = grad
       ctx!.fillRect(0, roadY - roadHeight, W, roadHeight * 2)
+
+      // Road edge lines
+      ctx!.save()
+      ctx!.globalAlpha = 0.25
+      ctx!.strokeStyle = '#fff'
+      ctx!.lineWidth = 1.5
+      ctx!.beginPath()
+      ctx!.moveTo(0, roadY - roadHeight / 2)
+      ctx!.lineTo(W, roadY - roadHeight / 2)
+      ctx!.moveTo(0, roadY + roadHeight / 2)
+      ctx!.lineTo(W, roadY + roadHeight / 2)
+      ctx!.stroke()
+      ctx!.restore()
     }
 
     function drawCar(car: Car) {
-      const alpha = car.depth
+      const alpha = 0.5 + car.depth * 0.5
       const w = car.length
-      const h = 5 * car.depth
+      const h = 8 * car.depth
       ctx!.save()
       ctx!.globalAlpha = alpha * 0.85
       ctx!.fillStyle = car.color
@@ -157,7 +170,7 @@ export default function HighwayCanvas() {
     <canvas
       ref={ref}
       className="absolute inset-0 w-full h-full"
-      style={{ opacity: 0.9 }}
+      style={{ opacity: 1 }}
     />
   )
 }

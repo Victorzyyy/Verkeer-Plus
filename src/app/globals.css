@@ -111,6 +111,11 @@
 ::-webkit-scrollbar-thumb { background: #2e2c28; border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: #d4191b; }
 
+@keyframes sway {
+  0%, 100% { transform: translateY(0) rotate(-4deg); }
+  50%      { transform: translateY(-8px) rotate(4deg); }
+}
+
 /* RTL utility overrides */
 [dir='rtl'] .text-left   { text-align: right; }
 [dir='rtl'] .text-right  { text-align: left; }
