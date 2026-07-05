@@ -18,18 +18,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const entries: MetadataRoute.Sitemap = []
 
   for (const page of pages) {
-    const url = `${base}${page.path}`
+    const nlUrl = `${base}${page.path}`
+    const arUrl = `${base}/ar${page.path === '/' ? '' : page.path}`
+    const changeFrequency = page.freq as MetadataRoute.Sitemap[number]['changeFrequency']
+    const languages = { 'nl-NL': nlUrl, ar: arUrl }
+
     entries.push({
-      url,
+      url: nlUrl,
       lastModified: new Date(),
-      changeFrequency: page.freq as MetadataRoute.Sitemap[number]['changeFrequency'],
+      changeFrequency,
       priority: page.priority,
-      alternates: {
-        languages: {
-          'nl': url,
-          'ar': `${url}${page.path === '/' ? '' : ''}?lang=ar`,
-        },
-      },
+      alternates: { languages },
+    })
+    entries.push({
+      url: arUrl,
+      lastModified: new Date(),
+      changeFrequency,
+      priority: page.priority,
+      alternates: { languages },
     })
   }
 

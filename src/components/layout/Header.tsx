@@ -1,12 +1,15 @@
 'use client'
 
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { useLang } from '@/lib/langContext'
+import { localizedHref } from '@/lib/localizedHref'
 import { navLinks } from '@/data/content'
 import { useState, useEffect } from 'react'
 
 export default function Header() {
-  const { lang, toggle } = useLang()
+  const { lang } = useLang()
+  const pathname = usePathname()
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
 
@@ -15,6 +18,11 @@ export default function Header() {
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
+
+  // Compute the equivalent URL in the other language for the language switcher.
+  const altHref = lang === 'ar'
+    ? (pathname.replace(/^\/ar/, '') || '/')
+    : `/ar${pathname === '/' ? '' : pathname}`
 
   return (
     <header
@@ -30,7 +38,7 @@ export default function Header() {
       <div className="max-w-[1120px] mx-auto px-6 md:px-12 flex items-center justify-between h-[60px]">
         {/* Logo */}
         <Link
-          href="/"
+          href={localizedHref('/', lang)}
           className="font-display font-bold text-[18px] tracking-[0.04em] text-text hover:opacity-80 transition-opacity"
         >
           VERKEER<span className="text-accent">S</span>PLUS
@@ -41,31 +49,31 @@ export default function Header() {
           {navLinks.map(link => (
             <Link
               key={link.href}
-              href={link.href}
+              href={localizedHref(link.href, lang)}
               className="font-mono text-[11px] uppercase tracking-[0.1em] text-muted hover:text-text transition-colors duration-200"
             >
               {link[lang]}
             </Link>
           ))}
 
-          {/* Language toggle */}
-          <button
-            onClick={toggle}
+          {/* Language switch */}
+          <Link
+            href={altHref}
             className="font-mono text-[11px] tracking-[0.08em] font-bold text-muted border border-concrete rounded px-2.5 py-1.5 hover:border-accent hover:text-white transition-all duration-200"
             title={lang === 'nl' ? 'عربي' : 'Nederlands'}
           >
             {lang === 'nl' ? 'AR' : 'NL'}
-          </button>
+          </Link>
         </nav>
 
-        {/* Mobile: lang toggle + hamburger */}
+        {/* Mobile: lang switch + hamburger */}
         <div className="flex md:hidden items-center gap-3">
-          <button
-            onClick={toggle}
+          <Link
+            href={altHref}
             className="font-mono text-[10px] tracking-[0.08em] font-bold text-muted border border-concrete rounded px-2 py-1 hover:border-accent hover:text-white transition-all"
           >
             {lang === 'nl' ? 'AR' : 'NL'}
-          </button>
+          </Link>
           <button
             onClick={() => setMenuOpen(o => !o)}
             className="text-muted hover:text-white transition-colors p-1"
@@ -94,7 +102,7 @@ export default function Header() {
             {navLinks.map(link => (
               <Link
                 key={link.href}
-                href={link.href}
+                href={localizedHref(link.href, lang)}
                 onClick={() => setMenuOpen(false)}
                 className="font-mono text-[12px] uppercase tracking-[0.1em] text-muted hover:text-white transition-colors py-1"
               >

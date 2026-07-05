@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useLang, useT } from '@/lib/langContext'
+import { localizedHref } from '@/lib/localizedHref'
 import { siteConfig } from '@/data/content'
 
 export default function Footer() {
@@ -13,19 +14,19 @@ export default function Footer() {
       <div className="max-w-[1120px] mx-auto px-6 md:px-12 py-7 flex flex-col sm:flex-row items-center justify-between gap-4">
         <p className="font-mono text-[11px] text-dim">© {new Date().getFullYear()} {t.footerCopy}</p>
         <div className="flex items-center gap-5 flex-wrap justify-center">
-          <Link href="/" className="font-mono text-[11px] text-dim hover:text-accent transition-colors">
+          <Link href={localizedHref('/', lang)} className="font-mono text-[11px] text-dim hover:text-accent transition-colors">
             {lang === 'nl' ? 'Home' : 'الرئيسية'}
           </Link>
-          <Link href="/werken-bij" className="font-mono text-[11px] text-dim hover:text-accent transition-colors">
+          <Link href={localizedHref('/werken-bij', lang)} className="font-mono text-[11px] text-dim hover:text-accent transition-colors">
             {lang === 'nl' ? 'Werken bij' : 'العمل معنا'}
           </Link>
-          <Link href="/contact" className="font-mono text-[11px] text-dim hover:text-accent transition-colors">
+          <Link href={localizedHref('/contact', lang)} className="font-mono text-[11px] text-dim hover:text-accent transition-colors">
             {lang === 'nl' ? 'Contact' : 'تواصل معنا'}
           </Link>
-          <Link href="/privacy" className="font-mono text-[11px] text-dim hover:text-accent transition-colors">
+          <Link href={localizedHref('/privacy', lang)} className="font-mono text-[11px] text-dim hover:text-accent transition-colors">
             {t.privacy}
           </Link>
-          <Link href="/voorwaarden" className="font-mono text-[11px] text-dim hover:text-accent transition-colors">
+          <Link href={localizedHref('/voorwaarden', lang)} className="font-mono text-[11px] text-dim hover:text-accent transition-colors">
             {t.terms}
           </Link>
           <span className="font-mono text-[11px] text-dim">

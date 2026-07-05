@@ -4,25 +4,32 @@ import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import { services } from '@/data/content'
 import ServiceContent from './ServiceContent'
+import type { Lang } from '@/types'
 
 export function generateStaticParams() {
   return services.map(s => ({ slug: s.id }))
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
-  const service = services.find(s => s.id === params.slug)
+export function generateMetadata({ params }: { params: { lang: Lang; slug: string } }): Metadata {
+  const { lang, slug } = params
+  const service = services.find(s => s.id === slug)
   if (!service) return {}
 
+  const svc = service[lang]
+  const bare = `/diensten/${service.id}`
+  const path = lang === 'ar' ? `/ar${bare}` : bare
+  const suffix = lang === 'ar' ? '— فيركيرسبلوس' : '— Verkeersregelaars inhuren'
+
   return {
-    title: `${service.nl.title} — Verkeersregelaars inhuren`,
-    description: service.nl.description,
+    title: `${svc.title} ${suffix}`,
+    description: svc.description,
     openGraph: {
-      title: `${service.nl.title} — Verkeersplus`,
-      description: service.nl.description,
+      title: `${svc.title} — Verkeersplus`,
+      description: svc.description,
     },
     alternates: {
-      canonical: `/diensten/${service.id}`,
-      languages: { 'nl-NL': `/diensten/${service.id}`, ar: `/diensten/${service.id}?lang=ar` },
+      canonical: path,
+      languages: { 'nl-NL': bare, ar: `/ar${bare}` },
     },
   }
 }

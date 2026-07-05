@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useLang, useT } from '@/lib/langContext'
+import { localizedHref } from '@/lib/localizedHref'
 import { services } from '@/data/content'
 
 export default function ServiceContent({ serviceId }: { serviceId: string }) {
@@ -15,7 +16,7 @@ export default function ServiceContent({ serviceId }: { serviceId: string }) {
     <>
       <section className="pb-12 border-b border-concrete">
         <div className="max-w-[1120px] mx-auto px-6 md:px-12 pt-16">
-          <Link href="/#diensten" className="font-mono text-[11px] uppercase tracking-[0.1em] text-dim hover:text-white transition-colors">
+          <Link href={localizedHref('/#diensten', lang)} className="font-mono text-[11px] uppercase tracking-[0.1em] text-dim hover:text-white transition-colors">
             {t.svcBackToServices}
           </Link>
           <span className="stripe mt-5" />
@@ -25,7 +26,7 @@ export default function ServiceContent({ serviceId }: { serviceId: string }) {
           <p className="text-[17px] text-muted leading-relaxed max-w-[600px] mb-8">
             {svc.description}
           </p>
-          <Link href="/contact" className="btn-primary">
+          <Link href={localizedHref('/contact', lang)} className="btn-primary">
             {t.contactBtn}
           </Link>
         </div>
@@ -77,7 +78,7 @@ export default function ServiceContent({ serviceId }: { serviceId: string }) {
             {otherServices.map(s => (
               <Link
                 key={s.id}
-                href={`/diensten/${s.id}`}
+                href={localizedHref(`/diensten/${s.id}`, lang)}
                 className="font-mono text-[12px] uppercase tracking-[0.08em] text-muted border border-concrete rounded px-4 py-2.5 hover:border-accent hover:text-white transition-all duration-200"
               >
                 {s[lang].title}

@@ -2,12 +2,14 @@
 
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
-import { useT } from '@/lib/langContext'
+import { useLang, useT } from '@/lib/langContext'
+import { localizedHref } from '@/lib/localizedHref'
 
 const HighwayCanvas = dynamic(() => import('@/components/canvas/HighwayCanvas'), { ssr: false })
 const LightStreakDivider = dynamic(() => import('@/components/canvas/LightStreakDivider'), { ssr: false })
 
 export default function Hero() {
+  const { lang } = useLang()
   const t = useT()
 
   return (
@@ -74,7 +76,7 @@ export default function Hero() {
               {t.heroSub}
             </p>
             <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
-              <a href="/contact" className="btn-primary">
+              <a href={localizedHref('/contact', lang)} className="btn-primary">
                 {t.contactBtn}
               </a>
               <a href="#over-ons" className="font-mono text-[13px] uppercase tracking-[0.08em] text-white/80 hover:text-white transition-colors">

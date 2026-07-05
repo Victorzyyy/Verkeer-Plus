@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useT } from '@/lib/langContext'
+import { localizedHref } from '@/lib/localizedHref'
 import { contactInfo } from '@/data/content'
 import { useLang } from '@/lib/langContext'
 
@@ -25,7 +26,7 @@ export default function ContactSnippet() {
             <p className="text-muted text-[16px] leading-relaxed mb-8">
               {t.contactBody}
             </p>
-            <Link href="/contact" className="btn-primary">
+            <Link href={localizedHref('/contact', lang)} className="btn-primary">
               {t.contactBtn}
             </Link>
           </div>

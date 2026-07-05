@@ -1,4 +1,3 @@
-import type { Metadata } from 'next'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import Hero from '@/components/sections/Hero'
@@ -10,29 +9,19 @@ import TrainingBanner from '@/components/sections/TrainingBanner'
 import FAQ from '@/components/sections/FAQ'
 import ContactSnippet from '@/components/sections/ContactSnippet'
 import { faqItems } from '@/data/content'
+import type { Lang } from '@/types'
 
-const faqSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: faqItems.map(item => ({
-    '@type': 'Question',
-    name: item.nl.q,
-    acceptedAnswer: { '@type': 'Answer', text: item.nl.a },
-  })),
-}
+export default function HomePage({ params }: { params: { lang: Lang } }) {
+  const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqItems.map(item => ({
+      '@type': 'Question',
+      name: item[params.lang].q,
+      acceptedAnswer: { '@type': 'Answer', text: item[params.lang].a },
+    })),
+  }
 
-export const metadata: Metadata = {
-  title: 'Verkeersplus — Verkeersregelaars inhuren, 24 uur geregeld',
-  alternates: {
-    canonical: '/',
-    languages: {
-      'nl-NL': '/',
-      'ar':    '/?lang=ar',
-    },
-  },
-}
-
-export default function HomePage() {
   return (
     <>
       <script
