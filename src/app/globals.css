@@ -1,0 +1,121 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-body: 'Inter', sans-serif;
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-mono: 'Space Mono', monospace;
+    --font-arabic: 'Noto Sans Arabic', sans-serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* RTL: swap body font to Arabic */
+  [dir='rtl'] body {
+    font-family: var(--font-arabic), var(--font-body);
+  }
+  [dir='rtl'] h1,
+  [dir='rtl'] h2,
+  [dir='rtl'] h3,
+  [dir='rtl'] h4 {
+    font-family: var(--font-arabic), var(--font-display);
+  }
+
+  /* Selection color */
+  ::selection {
+    background: #d4191b;
+    color: #fff;
+  }
+}
+
+@layer components {
+  /* Stripe accent bar */
+  .stripe {
+    @apply block w-8 h-0.5 bg-accent mb-4;
+  }
+
+  /* Section eyebrow */
+  .eyebrow {
+    @apply font-mono text-[11px] tracking-[0.14em] uppercase text-accent mb-3;
+  }
+
+  /* Ghost word behind sections */
+  .ghost-word {
+    @apply absolute top-6 left-1/2 -translate-x-1/2 font-display font-black
+           text-[clamp(72px,15vw,210px)] leading-none tracking-wider
+           pointer-events-none select-none whitespace-nowrap
+           opacity-[0.04] text-white;
+    -webkit-text-stroke: 1px rgba(255,255,255,0.08);
+    color: transparent;
+  }
+
+  /* Grain overlay */
+  .grain::after {
+    content: '';
+    @apply fixed inset-0 pointer-events-none opacity-[0.05] z-[2000];
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
+  }
+
+  /* Button primary (red filled) */
+  .btn-primary {
+    @apply inline-block font-mono text-[13px] tracking-[0.08em] uppercase
+           text-white bg-accent border-2 border-accent
+           px-7 py-3 transition-colors duration-200
+           hover:bg-accent-soft hover:border-accent-soft;
+  }
+
+  /* Button outline (red border) */
+  .btn-outline {
+    @apply inline-block font-mono text-[13px] tracking-[0.08em] uppercase
+           text-white border-2 border-accent
+           px-7 py-3 transition-colors duration-200
+           hover:bg-accent;
+  }
+
+  /* Form field base */
+  .field-base {
+    @apply w-full bg-bg border border-concrete rounded-md
+           px-3.5 py-2.5 font-body text-[15px] text-white
+           outline-none transition-all duration-200
+           placeholder:text-dim
+           focus:border-accent focus:ring-2 focus:ring-accent/20;
+  }
+
+  /* Radio pill */
+  .radio-pill {
+    @apply flex items-center gap-2 px-4 py-2 text-sm font-medium
+           text-muted bg-bg border border-concrete rounded-md
+           cursor-pointer transition-all duration-200;
+  }
+  .radio-pill.checked {
+    @apply bg-accent/10 border-accent text-white;
+  }
+
+  /* Section divider line */
+  .rule {
+    @apply border-none h-px bg-concrete;
+  }
+  .rule-accent {
+    @apply border-none h-px bg-accent;
+  }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #141311; }
+::-webkit-scrollbar-thumb { background: #2e2c28; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #d4191b; }
+
+/* RTL utility overrides */
+[dir='rtl'] .text-left   { text-align: right; }
+[dir='rtl'] .text-right  { text-align: left; }
+[dir='rtl'] .ml-auto     { margin-left: 0; margin-right: auto; }
+[dir='rtl'] .mr-auto     { margin-right: 0; margin-left: auto; }
+[dir='rtl'] .flex-row    { flex-direction: row-reverse; }
+[dir='rtl'] .stripe      { margin-left: 0; }
+[dir='rtl'] select       { background-position: left 14px center; padding-left: 36px; padding-right: 14px; }
