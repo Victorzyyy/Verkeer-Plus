@@ -28,3 +28,8 @@ export interface FitItem {
   nl: string
   ar: string
 }
+
+export interface FaqItem {
+  nl: { q: string; a: string }
+  ar: { q: string; a: string }
+}

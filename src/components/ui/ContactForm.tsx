@@ -5,6 +5,7 @@ import { useT } from '@/lib/langContext'
 import { useLang } from '@/lib/langContext'
 import { contactInfo, siteConfig } from '@/data/content'
 import { Field, Input, Textarea, Select, FormMessage } from './FormField'
+import { submitToWeb3Forms } from '@/lib/submitForm'
 
 export default function ContactForm() {
   const t = useT()
@@ -30,10 +31,17 @@ export default function ContactForm() {
       return
     }
     setSubmitting(true)
-    await new Promise(r => setTimeout(r, 1200))
-    setMessage({ type: 'success', html: t.ctSuccess })
+    const form = e.currentTarget
+    const result = await submitToWeb3Forms(new FormData(form), {
+      subject: `Nieuwe offerteaanvraag — ${naam}`,
+    })
     setSubmitting(false)
-    e.currentTarget.reset()
+    if (result.ok) {
+      setMessage({ type: 'success', html: t.ctSuccess })
+      form.reset()
+    } else {
+      setMessage({ type: 'error', html: t.ctSubmitError })
+    }
   }
 
   return (
@@ -48,7 +56,7 @@ export default function ContactForm() {
             {contactInfo.map(row => {
               const r = row[lang]
               const valueEl = (
-                <span className="text-[15px] text-accent">
+                <span className="text-[15px] text-accent-soft">
                   {row.href
                     ? <a href={row.href} className="hover:underline">{r.value}</a>
                     : r.value
@@ -78,7 +86,7 @@ export default function ContactForm() {
           </div>
           <a
             href={`tel:${siteConfig.phoneEmergency.replace(/\s|—/g, '')}`}
-            className="font-mono text-[18px] font-bold text-accent hover:underline whitespace-nowrap"
+            className="font-mono text-[18px] font-bold text-accent-soft hover:underline whitespace-nowrap"
           >
             {siteConfig.phoneEmergency}
           </a>

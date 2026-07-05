@@ -73,9 +73,14 @@ export default function Hero() {
                style={{ textShadow: '0 1px 8px rgba(0,0,0,0.6)' }}>
               {t.heroSub}
             </p>
-            <a href="#over-ons" className="btn-outline">
-              {t.heroBtn} →
-            </a>
+            <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
+              <a href="/contact" className="btn-primary">
+                {t.contactBtn}
+              </a>
+              <a href="#over-ons" className="font-mono text-[13px] uppercase tracking-[0.08em] text-white/80 hover:text-white transition-colors">
+                {t.heroBtn} →
+              </a>
+            </div>
           </div>
         </div>
       </section>

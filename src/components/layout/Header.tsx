@@ -37,7 +37,7 @@ export default function Header() {
         </Link>
 
         {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-7">
+        <nav aria-label={lang === 'nl' ? 'Hoofdmenu' : 'القائمة الرئيسية'} className="hidden md:flex items-center gap-7">
           {navLinks.map(link => (
             <Link
               key={link.href}
@@ -69,7 +69,9 @@ export default function Header() {
           <button
             onClick={() => setMenuOpen(o => !o)}
             className="text-muted hover:text-white transition-colors p-1"
-            aria-label="Menu"
+            aria-label={lang === 'nl' ? 'Menu' : 'القائمة'}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
           >
             <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
               {menuOpen ? (
@@ -87,8 +89,8 @@ export default function Header() {
 
       {/* Mobile menu */}
       {menuOpen && (
-        <div className="md:hidden bg-raised border-t border-concrete">
-          <nav className="max-w-[1120px] mx-auto px-6 py-4 flex flex-col gap-4">
+        <div id="mobile-menu" className="md:hidden bg-raised border-t border-concrete">
+          <nav aria-label={lang === 'nl' ? 'Mobiel menu' : 'قائمة الجوال'} className="max-w-[1120px] mx-auto px-6 py-4 flex flex-col gap-4">
             {navLinks.map(link => (
               <Link
                 key={link.href}

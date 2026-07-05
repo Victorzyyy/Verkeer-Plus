@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { useState, useEffect, useCallback } from 'react'
 import { useLang, useT } from '@/lib/langContext'
 import { services } from '@/data/content'
@@ -52,9 +53,14 @@ export default function Services() {
             <p className="text-muted text-[16px] leading-relaxed mb-8">
               {svc.description}
             </p>
-            <a href="/contact" className="btn-primary">
-              {t.contactBtn}
-            </a>
+            <div className="flex flex-wrap items-center gap-4">
+              <a href="/contact" className="btn-primary">
+                {t.contactBtn}
+              </a>
+              <Link href={`/diensten/${services[active].id}`} className="font-mono text-[12px] uppercase tracking-[0.08em] text-muted hover:text-white transition-colors">
+                {lang === 'nl' ? 'Meer informatie →' : 'مزيد من المعلومات ←'}
+              </Link>
+            </div>
           </div>
 
           <div>

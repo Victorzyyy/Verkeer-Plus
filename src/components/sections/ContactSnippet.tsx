@@ -36,7 +36,7 @@ export default function ContactSnippet() {
               const inner = (
                 <>
                   <span className="font-mono text-[11px] uppercase tracking-[0.1em] text-dim">{r.label}</span>
-                  <span className="text-[15px] text-accent">{r.value}</span>
+                  <span className="text-[15px] text-accent-soft">{r.value}</span>
                 </>
               )
               return (

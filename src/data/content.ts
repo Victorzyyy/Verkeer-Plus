@@ -1,4 +1,4 @@
-import type { Service, TrustItem, ContactInfo, NavLink, FitItem } from '@/types'
+import type { Service, TrustItem, ContactInfo, NavLink, FitItem, FaqItem } from '@/types'
 
 export const siteConfig = {
   name: 'Verkeersplus',
@@ -110,6 +110,59 @@ export const fitItems: FitItem[] = [
   { nl: 'Goed Nederlands spreekt (andere talen zijn een plus)',                    ar: 'تتحدث الهولندية جيداً (اللغات الأخرى ميزة إضافية)' },
 ]
 
+export const faqItems: FaqItem[] = [
+  {
+    nl: {
+      q: 'Hoe snel kunnen jullie verkeersregelaars leveren?',
+      a: 'In de meeste gevallen binnen 24 uur, door heel Nederland. Bij spoed proberen we nog sneller te schakelen — bel ons direct voor calamiteiten.',
+    },
+    ar: {
+      q: 'ما مدى سرعة توفير منظمي حركة المرور؟',
+      a: 'في معظم الحالات خلال 24 ساعة، في جميع أنحاء هولندا. في حالات الطوارئ نحاول التحرك بشكل أسرع — اتصل بنا مباشرة للطوارئ.',
+    },
+  },
+  {
+    nl: {
+      q: 'Zijn jullie verkeersregelaars gecertificeerd?',
+      a: 'Ja, al onze verkeersregelaars zijn CROW-gecertificeerd en werken volgens de geldende richtlijnen voor verkeersregeling in Nederland.',
+    },
+    ar: {
+      q: 'هل منظمو حركة المرور لديكم معتمدون؟',
+      a: 'نعم، جميع منظمي حركة المرور لدينا معتمدون من CROW ويعملون وفق المعايير المعتمدة لتنظيم حركة المرور في هولندا.',
+    },
+  },
+  {
+    nl: {
+      q: 'Wat kost het inhuren van een verkeersregelaar?',
+      a: 'Dat hangt af van locatie, duur en het aantal verkeersregelaars dat nodig is. Vraag een vrijblijvende offerte aan via het contactformulier — we reageren binnen 2 uur.',
+    },
+    ar: {
+      q: 'كم تكلفة استئجار منظم حركة مرور؟',
+      a: 'تعتمد التكلفة على الموقع والمدة وعدد منظمي حركة المرور المطلوبين. اطلب عرض أسعار مجاني عبر نموذج التواصل — نرد خلال ساعتين.',
+    },
+  },
+  {
+    nl: {
+      q: 'Kan ik ook terecht voor een last-minute spoedklus?',
+      a: 'Ja. We zijn 24/7 bereikbaar voor calamiteiten en spoedaanvragen en leveren binnen de kortst mogelijke tijd verkeersregelaars op locatie.',
+    },
+    ar: {
+      q: 'هل يمكنني التواصل لطلب عاجل في اللحظة الأخيرة؟',
+      a: 'نعم. نحن متاحون على مدار الساعة طوال أيام الأسبوع للطوارئ والطلبات العاجلة، ونوفر منظمي حركة مرور في الموقع في أسرع وقت ممكن.',
+    },
+  },
+  {
+    nl: {
+      q: 'In welke regio’s zijn jullie actief?',
+      a: 'We zijn landelijk actief, van Groningen tot Zeeland, en plannen verkeersregelaars in door het hele land.',
+    },
+    ar: {
+      q: 'في أي مناطق أنتم نشطون؟',
+      a: 'نحن نعمل على مستوى هولندا بأكملها، من خرونينغن إلى زيلاند، وننظم منظمي حركة مرور في جميع أنحاء البلاد.',
+    },
+  },
+]
+
 export const ui = {
   nl: {
     // Hero
@@ -121,6 +174,16 @@ export const ui = {
     // Section eyebrows / titles
     servicesEyebrow: '// 001 — Onze diensten',
     servicesTitle: 'Onze diensten',
+    svcProcessEyebrow: '// Hoe het werkt',
+    svcProcessTitle: 'Van aanvraag tot uitvoering',
+    svcStep1Title: '1. Aanvraag',
+    svcStep1Body: 'Je belt, mailt of vult het formulier in met locatie, datum en het aantal verkeersregelaars dat je nodig hebt.',
+    svcStep2Title: '2. Planning',
+    svcStep2Body: 'Wij stemmen de opdracht af, plannen gecertificeerde verkeersregelaars in en bevestigen de afspraken met je.',
+    svcStep3Title: '3. Uitvoering',
+    svcStep3Body: 'Onze verkeersregelaars zijn op de afgesproken tijd op locatie en werken volgens de geldende CROW-richtlijnen.',
+    svcOtherTitle: 'Andere diensten',
+    svcBackToServices: '← Alle diensten',
     trustEyebrow: '// 002 — Waarom Verkeersplus',
     trustTitle: 'Betrouwbaar. Gecertificeerd. Altijd bereikbaar.',
     networkEyebrow: '// 003 — Over ons',
@@ -131,7 +194,9 @@ export const ui = {
     bannerTitle: 'Zelf verkeersregelaar worden?',
     bannerBody: 'Via onze opleidingspartner haal je je certificering en sta je snel inzetbaar op de weg.',
     bannerBtn: 'Solliciteer direct',
-    contactEyebrow: '// 004 — Contact',
+    faqEyebrow: '// 004 — Veelgestelde vragen',
+    faqTitle: 'Veelgestelde vragen',
+    contactEyebrow: '// 005 — Contact',
     contactTitle: 'Direct een team nodig?',
     contactBody: 'Neem contact op voor een vrijblijvende offerte of bel direct voor spoedaanvragen. Wij reageren binnen 2 uur.',
     contactBtn: 'Offerte aanvragen',
@@ -148,6 +213,7 @@ export const ui = {
     wbSuccess: '<strong>Bedankt voor je sollicitatie!</strong><br/>We nemen binnen 2 werkdagen contact met je op.',
     wbError: 'Vul alle verplichte velden in.',
     wbEmailError: 'Vul een geldig e-mailadres in.',
+    wbSubmitError: 'Verzenden is niet gelukt. Bel of mail ons direct — zie de contactgegevens hierboven.',
     wbPrivacy: 'We behandelen je gegevens vertrouwelijk en nemen binnen 2 werkdagen contact op.',
     wbFileTooLarge: 'Bestand te groot (max 5 MB)',
     // Contact page
@@ -162,9 +228,10 @@ export const ui = {
     ctSubmitting: 'Versturen…',
     ctSuccess: '<strong>Aanvraag ontvangen!</strong><br/>We nemen zo snel mogelijk — maar uiterlijk binnen 2 uur — contact met je op.',
     ctError: 'Vul alle verplichte velden in.',
+    ctSubmitError: 'Verzenden is niet gelukt. Bel of mail ons direct — zie de contactgegevens hiernaast.',
     ctNote: 'Wij reageren binnen 2 uur. Spoed? Bel direct.',
     // Footer
-    footerCopy: '© 2025 Verkeersplus Services B.V.',
+    footerCopy: 'Verkeersplus Services B.V.',
     privacy: 'Privacy',
     terms: 'Voorwaarden',
     backHome: '← Terug naar home',
@@ -197,6 +264,16 @@ export const ui = {
     heroBtn: 'من نحن',
     servicesEyebrow: '// 001 — خدماتنا',
     servicesTitle: 'خدماتنا',
+    svcProcessEyebrow: '// كيف تسير العملية',
+    svcProcessTitle: 'من الطلب إلى التنفيذ',
+    svcStep1Title: '١. الطلب',
+    svcStep1Body: 'تتصل بنا أو تراسلنا أو تملأ النموذج مع تحديد الموقع والتاريخ وعدد منظمي حركة المرور المطلوبين.',
+    svcStep2Title: '٢. التخطيط',
+    svcStep2Body: 'ننسق تفاصيل الطلب، ونخطط لمنظمي حركة مرور معتمدين، ونؤكد لك المواعيد.',
+    svcStep3Title: '٣. التنفيذ',
+    svcStep3Body: 'يصل منظمو حركة المرور لدينا في الوقت المتفق عليه إلى الموقع ويعملون وفق معايير CROW المعتمدة.',
+    svcOtherTitle: 'خدمات أخرى',
+    svcBackToServices: '→ جميع الخدمات',
     trustEyebrow: '// 002 — لماذا فيركيرسبلوس',
     trustTitle: 'موثوقون. معتمدون. متاحون دائماً.',
     networkEyebrow: '// 003 — عن الشركة',
@@ -207,7 +284,9 @@ export const ui = {
     bannerTitle: 'هل تريد أن تصبح منظم حركة مرور؟',
     bannerBody: 'من خلال شريكنا التعليمي، يمكنك الحصول على الشهادة والبدء بالعمل بسرعة.',
     bannerBtn: 'قدّم طلبك الآن',
-    contactEyebrow: '// 004 — تواصل معنا',
+    faqEyebrow: '// 004 — الأسئلة الشائعة',
+    faqTitle: 'الأسئلة الشائعة',
+    contactEyebrow: '// 005 — تواصل معنا',
     contactTitle: 'تحتاج فريقاً فوراً؟',
     contactBody: 'تواصل معنا للحصول على عرض أسعار مجاني أو اتصل مباشرة للطلبات العاجلة. نرد خلال ساعتين.',
     contactBtn: 'طلب عرض أسعار',
@@ -223,6 +302,7 @@ export const ui = {
     wbSuccess: '<strong>شكراً لتقديمك!</strong><br/>سنتواصل معك خلال يومي عمل.',
     wbError: 'يرجى ملء جميع الحقول المطلوبة.',
     wbEmailError: 'يرجى إدخال بريد إلكتروني صحيح.',
+    wbSubmitError: 'تعذر الإرسال. يرجى الاتصال أو المراسلة مباشرة — انظر بيانات التواصل أعلاه.',
     wbPrivacy: 'نتعامل مع بياناتك بسرية ونتواصل معك خلال يومي عمل.',
     wbFileTooLarge: 'الملف كبير جداً (الحد الأقصى 5 ميغابايت)',
     ctInfoTitle: 'معلومات التواصل',
@@ -236,8 +316,9 @@ export const ui = {
     ctSubmitting: 'جاري الإرسال...',
     ctSuccess: '<strong>تم استلام طلبك!</strong><br/>سنتواصل معك في أقرب وقت ممكن وفي غضون ساعتين على الأكثر.',
     ctError: 'يرجى ملء جميع الحقول المطلوبة.',
+    ctSubmitError: 'تعذر الإرسال. يرجى الاتصال أو المراسلة مباشرة — انظر بيانات التواصل بجانبك.',
     ctNote: 'نرد خلال ساعتين. طارئ؟ اتصل مباشرة.',
-    footerCopy: '© 2025 فيركيرسبلوس سيرفيسز',
+    footerCopy: 'فيركيرسبلوس سيرفيسز',
     privacy: 'الخصوصية',
     terms: 'الشروط',
     backHome: 'العودة للرئيسية →',

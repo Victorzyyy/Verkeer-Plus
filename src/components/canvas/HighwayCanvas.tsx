@@ -14,6 +14,8 @@ export default function HighwayCanvas() {
     let animId: number
     let W = 0, H = 0, dpr = 1
     let roadY = 0, roadHeight = 0
+    let isVisible = true
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
     function resize() {
       dpr = window.devicePixelRatio || 1
@@ -153,8 +155,20 @@ export default function HighwayCanvas() {
         drawCar(car)
       })
 
-      animId = requestAnimationFrame(draw)
+      if (isVisible && !reduceMotion) {
+        animId = requestAnimationFrame(draw)
+      }
     }
+
+    const observer = new IntersectionObserver(([entry]) => {
+      const wasVisible = isVisible
+      isVisible = entry.isIntersecting
+      if (isVisible && !wasVisible && !reduceMotion) {
+        cancelAnimationFrame(animId)
+        draw()
+      }
+    }, { threshold: 0 })
+    observer.observe(c)
 
     resize()
     window.addEventListener('resize', resize)
@@ -163,6 +177,7 @@ export default function HighwayCanvas() {
     return () => {
       cancelAnimationFrame(animId)
       window.removeEventListener('resize', resize)
+      observer.disconnect()
     }
   }, [])
 

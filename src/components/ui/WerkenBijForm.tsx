@@ -5,6 +5,7 @@ import { useT } from '@/lib/langContext'
 import { Field, Input, Textarea, Select, RadioPillGroup, FileUpload, FormMessage } from './FormField'
 import { fitItems } from '@/data/content'
 import { useLang } from '@/lib/langContext'
+import { submitToWeb3Forms } from '@/lib/submitForm'
 
 export default function WerkenBijForm() {
   const t = useT()
@@ -38,13 +39,17 @@ export default function WerkenBijForm() {
     }
 
     setSubmitting(true)
-    // In production: replace with real API call
-    // const res = await fetch('/api/sollicitatie', { method: 'POST', body: formData })
-    await new Promise(r => setTimeout(r, 1200))
-    setMessage({ type: 'success', html: t.wbSuccess })
+    const result = await submitToWeb3Forms(new FormData(form), {
+      subject: `Nieuwe sollicitatie verkeersregelaar — ${naam}`,
+    })
     setSubmitting(false)
-    form.reset()
-    setCvFile(null)
+    if (result.ok) {
+      setMessage({ type: 'success', html: t.wbSuccess })
+      form.reset()
+      setCvFile(null)
+    } else {
+      setMessage({ type: 'error', html: t.wbSubmitError })
+    }
   }
 
   function handleFile(file: File | null) {
@@ -176,6 +181,7 @@ export default function WerkenBijForm() {
           <div className="mb-4">
             <FileUpload
               id="cv-upload"
+              name="attachment"
               accept=".pdf,.doc,.docx"
               label={t.formCV}
               hint={t.formCVHint}

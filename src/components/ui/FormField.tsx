@@ -1,19 +1,22 @@
-import React from 'react'
+import React, { useId } from 'react'
 
 interface FieldProps {
   label: string
   required?: boolean
   error?: string
-  children: React.ReactNode
+  children: React.ReactElement
 }
 
 export function Field({ label, required, error, children }: FieldProps) {
+  const id = useId()
+  const input = React.cloneElement(children as React.ReactElement<any>, { id, 'aria-invalid': !!error || undefined })
+
   return (
     <div className="flex flex-col gap-1.5">
-      <label className="text-[13px] font-medium text-muted">
-        {label}{required && <span className="text-accent ml-1" aria-hidden>*</span>}
+      <label htmlFor={id} className="text-[13px] font-medium text-muted">
+        {label}{required && <span className="text-accent-soft ml-1" aria-hidden>*</span>}
       </label>
-      {children}
+      {input}
       {error && <p className="text-[12px] text-accent-soft">{error}</p>}
     </div>
   )
@@ -92,6 +95,7 @@ export function RadioPillGroup({ name, options, value, onChange }: RadioPillGrou
 
 interface FileUploadProps {
   id: string
+  name: string
   accept?: string
   label: string
   hint: string
@@ -99,16 +103,17 @@ interface FileUploadProps {
   error?: string
   onChange: (file: File | null) => void
 }
-export function FileUpload({ id, accept, label, hint, fileName, error, onChange }: FileUploadProps) {
+export function FileUpload({ id, name, accept, label, hint, fileName, error, onChange }: FileUploadProps) {
   return (
     <div>
-      <label className="text-[13px] font-medium text-muted block mb-1.5">{label}</label>
+      <label htmlFor={id} className="text-[13px] font-medium text-muted block mb-1.5">{label}</label>
       <label
         htmlFor={id}
         className="relative flex items-center gap-3 px-4 py-3.5 bg-bg border border-dashed border-concrete rounded-md cursor-pointer hover:border-dim transition-colors"
       >
         <input
           id={id}
+          name={name}
           type="file"
           accept={accept}
           className="absolute inset-0 opacity-0 cursor-pointer"

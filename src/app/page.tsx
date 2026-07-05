@@ -7,7 +7,19 @@ import LightStreakDivider from '@/components/canvas/LightStreakDivider'
 import OverOns from '@/components/sections/OverOns'
 import Network from '@/components/sections/Network'
 import TrainingBanner from '@/components/sections/TrainingBanner'
+import FAQ from '@/components/sections/FAQ'
 import ContactSnippet from '@/components/sections/ContactSnippet'
+import { faqItems } from '@/data/content'
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqItems.map(item => ({
+    '@type': 'Question',
+    name: item.nl.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.nl.a },
+  })),
+}
 
 export const metadata: Metadata = {
   title: 'Verkeersplus — Verkeersregelaars inhuren, 24 uur geregeld',
@@ -23,6 +35,10 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
       <Header />
       <main className="grain">
         <Hero />
@@ -31,6 +47,7 @@ export default function HomePage() {
         <OverOns />
         <Network />
         <TrainingBanner />
+        <FAQ />
         <ContactSnippet />
       </main>
       <Footer />

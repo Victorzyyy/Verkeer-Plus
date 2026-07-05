@@ -11,7 +11,7 @@ const config: Config = {
         accent:   '#d4191b',
         'accent-soft': '#e8413f',
         muted:    '#b8b2a6',
-        dim:      '#7a756c',
+        dim:      '#8f8a80',
       },
       fontFamily: {
         display: ['var(--font-display)', 'sans-serif'],

@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
 import type { Lang } from '@/types'
+import { ui } from '@/data/content'
 
 interface LangContextValue {
   lang: Lang
@@ -40,6 +41,5 @@ export function useLang() {
 
 export function useT() {
   const { lang } = useLang()
-  const { ui } = require('@/data/content')
-  return ui[lang] as typeof ui['nl']
+  return ui[lang]
 }

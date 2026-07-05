@@ -9,7 +9,7 @@ export default function WerkenBijContent() {
   return (
     <>
       {/* Page hero */}
-      <section className="py-18 pb-12 border-b border-concrete">
+      <section className="pb-12 border-b border-concrete">
         <div className="max-w-[1120px] mx-auto px-6 md:px-12 pt-16">
           <span className="stripe" />
           <p className="eyebrow">{t.wbEyebrow}</p>

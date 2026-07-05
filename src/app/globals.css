@@ -40,7 +40,7 @@
 
   /* Section eyebrow */
   .eyebrow {
-    @apply font-mono text-[11px] tracking-[0.14em] uppercase text-accent mb-3;
+    @apply font-mono text-[11px] tracking-[0.14em] uppercase text-accent-soft mb-3;
   }
 
   /* Ghost word behind sections */
@@ -114,6 +114,15 @@
 @keyframes sway {
   0%, 100% { transform: translateY(0) rotate(-4deg); }
   50%      { transform: translateY(-8px) rotate(4deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /* RTL utility overrides */

@@ -45,16 +45,36 @@ export const metadata: Metadata = {
     siteName: 'Verkeersplus',
     title: 'Verkeersplus — Verkeersregelaars inhuren, 24 uur geregeld',
     description: 'Gecertificeerde verkeersregelaars voor wegwerkzaamheden, evenementen en spoedklussen. Landelijke dekking, 24/7.',
+    images: [{ url: '/images/road-bg.jpg', width: 1376, height: 768, alt: 'Verkeersplus — verkeersregelaars op de weg' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Verkeersplus — 24 uur verkeersregelaars',
     description: 'CROW-gecertificeerde verkeersregelaars, landelijk actief, dag en nacht bereikbaar.',
+    images: ['/images/road-bg.jpg'],
   },
   robots: {
     index: true,
     follow: true,
     googleBot: { index: true, follow: true },
+  },
+}
+
+const localBusinessSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name: siteConfig.name,
+  legalName: siteConfig.legalName,
+  url: siteConfig.baseUrl,
+  email: siteConfig.email,
+  telephone: siteConfig.phone,
+  areaServed: {
+    '@type': 'Country',
+    name: 'Nederland',
+  },
+  address: {
+    '@type': 'PostalAddress',
+    addressCountry: 'NL',
   },
 }
 
@@ -66,6 +86,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${inter.variable} ${spaceGrotesk.variable} ${spaceMono.variable} ${notoArabic.variable}`}
     >
       <body className="bg-bg text-text font-body antialiased">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+        />
         <LangProvider>
           {children}
         </LangProvider>
