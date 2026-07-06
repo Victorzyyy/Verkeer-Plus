@@ -14,18 +14,19 @@ export default function Hero() {
   return (
     <>
       <section className="relative min-h-[72vh] flex flex-col overflow-hidden bg-bg">
-        {/* Background road image — heavy blur + strong dark overlay for a calm, atmospheric backdrop */}
+        {/* Background road image — blurred + darkened, but visible enough to feel like a real scene */}
         <div className="absolute inset-0 z-0 overflow-hidden">
           <Image
-            src="/images/road-bg.jpg"
+            src="/images/road-bg.webp"
             alt=""
             fill
             priority
-            className="object-cover object-center opacity-55 scale-110"
-            style={{ filter: 'blur(18px) brightness(0.55)' }}
+            className="object-cover object-center scale-110"
+            style={{ filter: 'blur(12px) brightness(0.7)' }}
             sizes="100vw"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-bg/60 via-bg/30 to-bg" />
+          <div className="absolute inset-0 bg-bg/45" />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-bg" />
         </div>
 
         {/* Traffic signs - decorative SVG. Scattered asymmetrically so they don't crowd the hero copy. */}

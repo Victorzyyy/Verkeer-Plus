@@ -11,7 +11,7 @@ export default function Network() {
       <div
         className="absolute inset-0 z-0"
         style={{
-          backgroundImage: 'url(/images/road-bg.jpg)',
+          backgroundImage: 'url(/images/road-bg.webp)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           filter: 'blur(2px) brightness(0.32)',

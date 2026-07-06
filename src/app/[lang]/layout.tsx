@@ -68,13 +68,13 @@ export function generateMetadata({ params }: { params: { lang: Lang } }): Metada
       siteName: 'Verkeersplus',
       title: titles[lang],
       description: descriptions[lang],
-      images: [{ url: '/images/road-bg.jpg', width: 1376, height: 768, alt: 'Verkeersplus — verkeersregelaars op de weg' }],
+      images: [{ url: '/images/road-bg.webp', width: 1376, height: 768, alt: 'Verkeersplus — verkeersregelaars op de weg' }],
     },
     twitter: {
       card: 'summary_large_image',
       title: titles[lang],
       description: descriptions[lang],
-      images: ['/images/road-bg.jpg'],
+      images: ['/images/road-bg.webp'],
     },
     robots: {
       index: true,
