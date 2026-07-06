@@ -1,21 +1,15 @@
 'use client'
 
-import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { useLang, useT } from '@/lib/langContext'
 import { localizedHref } from '@/lib/localizedHref'
-
-const LightStreakDivider = dynamic(() => import('@/components/canvas/LightStreakDivider'), { ssr: false })
 
 export default function TrainingBanner() {
   const { lang } = useLang()
   const t = useT()
 
   return (
-    <>
-      <LightStreakDivider />
-
-      <section className="relative overflow-hidden bg-raised border-b-4 border-accent">
+    <section className="relative overflow-hidden bg-raised border-b-4 border-accent">
         {/* Left red bar */}
         <div className="absolute top-0 left-0 bottom-0 w-1 bg-accent" />
 
@@ -29,8 +23,7 @@ export default function TrainingBanner() {
           <Link href={localizedHref('/werken-bij', lang)} className="btn-outline shrink-0">
             {t.bannerBtn}
           </Link>
-        </div>
-      </section>
-    </>
+      </div>
+    </section>
   )
 }
