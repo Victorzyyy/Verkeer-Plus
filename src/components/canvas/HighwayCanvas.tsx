@@ -33,9 +33,10 @@ export default function HighwayCanvas() {
       roadHeight = Math.max(60, H * 0.14)
     }
 
+    type Kind = 'car' | 'truck'
     type Car = {
       x: number; y: number; speed: number; length: number
-      color: string; laneIdx: number; depth: number; gap: number
+      color: string; laneIdx: number; depth: number; gap: number; kind: Kind
     }
 
     const NUM_LANES = 5
@@ -46,24 +47,32 @@ export default function HighwayCanvas() {
       return roadY - roadHeight / 2 + laneH * (i + 0.5)
     }
 
-    function makeColor(isRed: boolean) {
-      if (isRed) return `hsl(0,${70 + Math.random()*20}%,${45 + Math.random()*15}%)`
-      const h = [180,210,220,240][Math.floor(Math.random()*4)]
-      return `hsl(${h},${30+Math.random()*20}%,${55+Math.random()*15}%)`
+    function makeCarColor() {
+      const h = [180, 210, 220, 240][Math.floor(Math.random() * 4)]
+      return `hsl(${h},${30 + Math.random() * 20}%,${55 + Math.random() * 15}%)`
+    }
+
+    function makeTruckColor() {
+      const opts = ['hsl(0,0%,88%)', 'hsl(210,12%,72%)', 'hsl(0,0%,58%)', 'hsl(215,25%,42%)']
+      return opts[Math.floor(Math.random() * opts.length)]
     }
 
     function spawnCar(laneIdx: number): Car {
       const right = laneIdx < 3
       const depth = 0.3 + Math.random() * 0.7
+      const kind: Kind = Math.random() < 0.18 ? 'truck' : 'car'
+      const baseLength = kind === 'truck' ? 60 + Math.random() * 40 : 35 + Math.random() * 45
+      const baseSpeed = kind === 'truck' ? 1 + Math.random() * 1.6 : 1.5 + Math.random() * 3
       return {
-        x: right ? -100 : W + 100,
+        x: right ? -140 : W + 140,
         y: laneY(laneIdx),
-        speed: (right ? 1 : -1) * (1.5 + Math.random() * 3) * depth,
-        length: (35 + Math.random() * 50) * depth,
-        color: makeColor(false),
+        speed: (right ? 1 : -1) * baseSpeed * depth,
+        length: baseLength * depth,
+        color: kind === 'truck' ? makeTruckColor() : makeCarColor(),
         laneIdx,
         depth,
         gap: 80 + Math.random() * 120,
+        kind,
       }
     }
 
@@ -100,45 +109,87 @@ export default function HighwayCanvas() {
       ctx!.restore()
     }
 
+    // Draws in local space with the vehicle centered at the origin and "front" at +x;
+    // the caller flips the axis for left-moving traffic so we only need one shape per kind.
+    function drawCarShape(w: number, h: number) {
+      const frontX = w / 2
+      const rearX = -w / 2
+      const roofFrontX = w * 0.10
+      const roofRearX = -w * 0.22
+      const roofY = -h / 2
+      const beltY = -h * 0.05
+      const bottomY = h * 0.4
+
+      ctx!.beginPath()
+      ctx!.moveTo(frontX - w * 0.04, bottomY)
+      ctx!.lineTo(frontX, beltY)
+      ctx!.lineTo(roofFrontX, roofY)
+      ctx!.lineTo(roofRearX, roofY)
+      ctx!.lineTo(rearX + w * 0.1, beltY)
+      ctx!.lineTo(rearX, bottomY)
+      ctx!.closePath()
+      ctx!.fill()
+    }
+
+    function drawTruckShape(w: number, h: number) {
+      const cabW = w * 0.26
+      const bodyTop = -h / 2
+      const bodyBottom = h * 0.4
+
+      // Trailer (rear), slightly shorter than the cab
+      ctx!.beginPath()
+      ctx!.roundRect(-w / 2, bodyTop * 0.75, w - cabW, bodyBottom - bodyTop * 0.75, 1)
+      ctx!.fill()
+
+      // Cab (front), full height
+      ctx!.beginPath()
+      ctx!.roundRect(w / 2 - cabW, bodyTop, cabW, bodyBottom - bodyTop, 1.5)
+      ctx!.fill()
+    }
+
     function drawCar(car: Car) {
       const isRight = car.speed > 0
+      const isTruck = car.kind === 'truck'
       const alpha = 0.5 + car.depth * 0.5
       const w = car.length
-      const h = Math.max(6, 10 * car.depth)
-      const x = car.x
-      const y = car.y
+      const h = Math.max(7, (isTruck ? 13 : 10) * car.depth)
 
       ctx!.save()
+      ctx!.translate(car.x, car.y)
+      if (!isRight) ctx!.scale(-1, 1)
 
       // Body
-      ctx!.globalAlpha = alpha * 0.9
+      ctx!.globalAlpha = alpha * 0.92
       ctx!.fillStyle = car.color
-      ctx!.beginPath()
-      ctx!.roundRect(x - w / 2, y - h / 2, w, h, h / 3)
-      ctx!.fill()
+      if (isTruck) drawTruckShape(w, h)
+      else drawCarShape(w, h)
 
-      // Cabin — darker inset shape on top, gives the silhouette a car-like profile
-      const cabinW = w * 0.45
-      const cabinH = h * 0.55
-      ctx!.globalAlpha = alpha * 0.6
-      ctx!.fillStyle = 'rgba(8,8,8,0.9)'
-      ctx!.beginPath()
-      ctx!.roundRect(x - cabinW / 2, y - h / 2 - cabinH * 0.35, cabinW, cabinH, cabinH / 3)
-      ctx!.fill()
+      // Wheels
+      ctx!.globalAlpha = alpha * 0.9
+      ctx!.fillStyle = 'rgba(6,6,6,0.9)'
+      const wheelY = h * 0.4
+      const wheelR = Math.max(1, h * 0.16)
+      const wheelXs = isTruck ? [-w * 0.34, -w * 0.02, w * 0.32] : [-w * 0.26, w * 0.26]
+      wheelXs.forEach(wx => {
+        ctx!.beginPath()
+        ctx!.arc(wx, wheelY, wheelR, 0, Math.PI * 2)
+        ctx!.fill()
+      })
 
-      // Headlight / taillight
+      // Headlight (front) / taillight (rear) — always at local +x/-x since the axis is flipped above
       ctx!.globalAlpha = alpha
-      ctx!.fillStyle = isRight ? 'rgba(255,240,180,0.95)' : 'rgba(255,60,60,0.95)'
-      const lx = isRight ? x + w / 2 - 2.5 : x - w / 2
-      ctx!.fillRect(lx, y - h / 2 + 1, 2.5, h - 2)
+      ctx!.fillStyle = 'rgba(255,240,180,0.95)'
+      ctx!.fillRect(w / 2 - 2.2, -h * 0.15, 2.2, h * 0.35)
+      ctx!.fillStyle = 'rgba(255,60,60,0.95)'
+      ctx!.fillRect(-w / 2, -h * 0.15, 2.2, h * 0.35)
 
-      // Glow
-      ctx!.globalAlpha = 0.18 * alpha
-      const glowGrad = ctx!.createRadialGradient(lx + 1, y, 0, lx + 1, y, 16)
-      glowGrad.addColorStop(0, isRight ? 'rgba(255,240,180,0.6)' : 'rgba(255,60,60,0.5)')
-      glowGrad.addColorStop(1, 'rgba(0,0,0,0)')
-      ctx!.fillStyle = glowGrad
-      ctx!.fillRect(lx - 16, y - 16, 32, 32)
+      // Headlight glow (direction of travel only)
+      ctx!.globalAlpha = 0.16 * alpha
+      const glow = ctx!.createRadialGradient(w / 2, 0, 0, w / 2, 0, 15)
+      glow.addColorStop(0, 'rgba(255,240,180,0.6)')
+      glow.addColorStop(1, 'rgba(0,0,0,0)')
+      ctx!.fillStyle = glow
+      ctx!.fillRect(w / 2 - 15, -15, 30, 30)
 
       ctx!.restore()
     }
