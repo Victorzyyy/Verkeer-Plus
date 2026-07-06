@@ -67,11 +67,13 @@ export default function HighwayCanvas() {
       }
     }
 
-    for (let i = 0; i < NUM_LANES; i++) {
-      for (let j = 0; j < 3; j++) {
-        const car = spawnCar(i)
-        car.x = Math.random() * W
-        cars.push(car)
+    function spawnInitialCars() {
+      for (let i = 0; i < NUM_LANES; i++) {
+        for (let j = 0; j < 3; j++) {
+          const car = spawnCar(i)
+          car.x = Math.random() * W
+          cars.push(car)
+        }
       }
     }
 
@@ -171,6 +173,7 @@ export default function HighwayCanvas() {
     observer.observe(c)
 
     resize()
+    spawnInitialCars()
     window.addEventListener('resize', resize)
     draw()
 

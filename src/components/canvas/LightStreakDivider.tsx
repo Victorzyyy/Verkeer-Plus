@@ -53,11 +53,13 @@ export default function LightStreakDivider() {
       }
     }
 
-    for (let i = 0; i < NUM_LANES; i++) {
-      for (let j = 0; j < 4; j++) {
-        const s = spawnStreak(i)
-        s.x = Math.random() * W
-        streaks.push(s)
+    function spawnInitialStreaks() {
+      for (let i = 0; i < NUM_LANES; i++) {
+        for (let j = 0; j < 4; j++) {
+          const s = spawnStreak(i)
+          s.x = Math.random() * W
+          streaks.push(s)
+        }
       }
     }
 
@@ -139,6 +141,7 @@ export default function LightStreakDivider() {
     observer.observe(c)
 
     resize()
+    spawnInitialStreaks()
     window.addEventListener('resize', resize)
     draw()
 
