@@ -5,7 +5,6 @@ import Image from 'next/image'
 import { useLang, useT } from '@/lib/langContext'
 import { localizedHref } from '@/lib/localizedHref'
 
-const HighwayCanvas = dynamic(() => import('@/components/canvas/HighwayCanvas'), { ssr: false })
 const LightStreakDivider = dynamic(() => import('@/components/canvas/LightStreakDivider'), { ssr: false })
 
 export default function Hero() {
@@ -26,11 +25,6 @@ export default function Hero() {
             sizes="100vw"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-bg/60 via-bg/40 to-bg" />
-        </div>
-
-        {/* Animated highway canvas */}
-        <div className="absolute inset-0 z-[1]">
-          <HighwayCanvas />
         </div>
 
         {/* Traffic signs - decorative SVG. Placed at edges so they never crowd the hero copy. */}
