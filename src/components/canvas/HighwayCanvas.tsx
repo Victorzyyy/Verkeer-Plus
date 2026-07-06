@@ -101,27 +101,45 @@ export default function HighwayCanvas() {
     }
 
     function drawCar(car: Car) {
+      const isRight = car.speed > 0
       const alpha = 0.5 + car.depth * 0.5
       const w = car.length
-      const h = 8 * car.depth
+      const h = Math.max(6, 10 * car.depth)
+      const x = car.x
+      const y = car.y
+
       ctx!.save()
-      ctx!.globalAlpha = alpha * 0.85
+
+      // Body
+      ctx!.globalAlpha = alpha * 0.9
       ctx!.fillStyle = car.color
       ctx!.beginPath()
-      ctx!.roundRect(car.x - w / 2, car.y - h / 2, w, h, 2)
+      ctx!.roundRect(x - w / 2, y - h / 2, w, h, h / 3)
       ctx!.fill()
-      // headlights / taillights
-      const isRight = car.speed > 0
+
+      // Cabin — darker inset shape on top, gives the silhouette a car-like profile
+      const cabinW = w * 0.45
+      const cabinH = h * 0.55
+      ctx!.globalAlpha = alpha * 0.6
+      ctx!.fillStyle = 'rgba(8,8,8,0.9)'
+      ctx!.beginPath()
+      ctx!.roundRect(x - cabinW / 2, y - h / 2 - cabinH * 0.35, cabinW, cabinH, cabinH / 3)
+      ctx!.fill()
+
+      // Headlight / taillight
       ctx!.globalAlpha = alpha
-      ctx!.fillStyle = isRight ? 'rgba(255,240,180,0.9)' : 'rgba(255,60,60,0.9)'
-      const lx = isRight ? car.x + w / 2 - 2 : car.x - w / 2
-      ctx!.fillRect(lx, car.y - h / 2, 3, h)
-      ctx!.globalAlpha = 0.2 * alpha
-      const glowGrad = ctx!.createRadialGradient(lx + 1, car.y, 0, lx + 1, car.y, 18)
+      ctx!.fillStyle = isRight ? 'rgba(255,240,180,0.95)' : 'rgba(255,60,60,0.95)'
+      const lx = isRight ? x + w / 2 - 2.5 : x - w / 2
+      ctx!.fillRect(lx, y - h / 2 + 1, 2.5, h - 2)
+
+      // Glow
+      ctx!.globalAlpha = 0.18 * alpha
+      const glowGrad = ctx!.createRadialGradient(lx + 1, y, 0, lx + 1, y, 16)
       glowGrad.addColorStop(0, isRight ? 'rgba(255,240,180,0.6)' : 'rgba(255,60,60,0.5)')
       glowGrad.addColorStop(1, 'rgba(0,0,0,0)')
       ctx!.fillStyle = glowGrad
-      ctx!.fillRect(lx - 18, car.y - 18, 36, 36)
+      ctx!.fillRect(lx - 16, y - 16, 32, 32)
+
       ctx!.restore()
     }
 
