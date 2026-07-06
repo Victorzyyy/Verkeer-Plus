@@ -11,19 +11,19 @@ export default function ContactSnippet() {
   const { lang } = useLang()
 
   return (
-    <section id="contact" className="relative py-24 bg-bg overflow-hidden">
+    <section id="contact" className="relative overflow-hidden bg-bg py-20 sm:py-24">
       <div aria-hidden className="ghost-word">{lang === 'nl' ? '24/7' : '٢٤/٧'}</div>
 
       <div className="relative z-10 max-w-[1120px] mx-auto px-6 md:px-12">
         <span className="stripe" />
         <p className="eyebrow">{t.contactEyebrow}</p>
 
-        <div className="grid md:grid-cols-2 gap-12 items-start">
+        <div className="grid gap-8 md:grid-cols-[1fr_0.9fr] md:items-start">
           <div>
-            <h2 className="font-display font-bold text-[clamp(24px,4vw,38px)] text-white mb-4">
+            <h2 className="mb-4 font-display text-[clamp(30px,5vw,58px)] font-bold leading-[0.98] text-white">
               {t.contactTitle}
             </h2>
-            <p className="text-muted text-[16px] leading-relaxed mb-8">
+            <p className="mb-8 text-[16px] leading-relaxed text-white/82">
               {t.contactBody}
             </p>
             <Link href={localizedHref('/contact', lang)} className="btn-primary">
@@ -31,17 +31,17 @@ export default function ContactSnippet() {
             </Link>
           </div>
 
-          <ul className="space-y-0">
+          <ul className="border border-concrete bg-raised/80 p-4 sm:p-5">
             {contactInfo.map(row => {
               const r = row[lang]
               const inner = (
                 <>
                   <span className="font-mono text-[11px] uppercase tracking-[0.1em] text-dim">{r.label}</span>
-                  <span className="text-[15px] text-accent-soft">{r.value}</span>
+                  <span className="text-right text-[15px] font-semibold text-accent-soft">{r.value}</span>
                 </>
               )
               return (
-                <li key={row.key} className="flex justify-between items-baseline gap-4 py-4 border-b border-concrete last:border-none">
+                <li key={row.key} className="flex justify-between items-baseline gap-4 border-b border-concrete py-4 last:border-none">
                   {row.href
                     ? <a href={row.href} className="contents hover:opacity-80 transition-opacity">{inner}</a>
                     : inner

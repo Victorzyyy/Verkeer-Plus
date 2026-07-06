@@ -1,12 +1,13 @@
 'use client'
 
-import { useT } from '@/lib/langContext'
+import { useLang, useT } from '@/lib/langContext'
 
 export default function Network() {
+  const { lang } = useLang()
   const t = useT()
 
   return (
-    <section className="relative py-24 overflow-hidden">
+    <section className="relative overflow-hidden py-20 sm:py-24">
       {/* Road asphalt bg */}
       <div
         className="absolute inset-0 z-0"
@@ -19,26 +20,43 @@ export default function Network() {
         }}
       />
 
-      <div className="relative z-10 max-w-[1120px] mx-auto px-6 md:px-12">
+      <div className="relative z-10 mx-auto grid max-w-[1120px] gap-8 px-6 md:grid-cols-[1fr_340px] md:px-12">
+        <div>
         <span className="stripe" />
         <p className="eyebrow">{t.networkEyebrow}</p>
 
         <h2
-          className="font-display font-bold text-[clamp(26px,4vw,38px)] mb-5 leading-[1.2] tracking-[-0.01em] max-w-[600px]"
+          className="mb-5 max-w-[680px] font-display text-[clamp(30px,5vw,58px)] font-bold leading-[0.98] tracking-[-0.01em]"
           style={{ textShadow: '0 2px 12px rgba(0,0,0,0.7), 0 0 40px rgba(0,0,0,0.4)' }}
         >
           <span className="text-accent">{t.networkTitleRed}</span>{' '}
           <span className="text-white">{t.networkTitleWhite}</span>
         </h2>
 
-        <p
-          className="text-[clamp(15.5px,1.6vw,17px)] font-medium leading-[1.9] max-w-[640px] text-white/95"
-          style={{ textShadow: '0 2px 10px rgba(0,0,0,0.85), 0 0 24px rgba(0,0,0,0.6)' }}
-        >
-          {t.networkBody.split(t.networkBodyBold)[0]}
-          <strong className="text-white font-semibold">{t.networkBodyBold}</strong>
-          {t.networkBody.split(t.networkBodyBold)[1]}
-        </p>
+        <div className="network-story max-w-[720px]">
+          <p className="text-[clamp(16px,1.7vw,18px)] font-semibold leading-[1.9] text-white">
+            {t.networkBody.split(t.networkBodyBold)[0]}
+            <strong className="network-story-highlight">{t.networkBodyBold}</strong>
+            {t.networkBody.split(t.networkBodyBold)[1]}
+          </p>
+        </div>
+        </div>
+
+        <div className="border border-white/15 bg-bg/80 p-5 backdrop-blur">
+          <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-accent-soft">
+            {lang === 'nl' ? 'Operationele basis' : 'قاعدة تشغيلية'}
+          </p>
+          <div className="mt-5 grid gap-3">
+            {(lang === 'nl'
+              ? ['Partners door heel Nederland', 'Pijler Groep netwerk', 'Snel schaalbare ploegen']
+              : ['شركاء في جميع أنحاء هولندا', 'شبكة Pijler Groep', 'فرق قابلة للتوسع بسرعة']
+            ).map(item => (
+              <div key={item} className="border border-concrete bg-raised/70 px-4 py-3 text-sm font-semibold text-white">
+                {item}
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   )
