@@ -33,17 +33,38 @@ export default function Hero() {
           <HighwayCanvas />
         </div>
 
-        {/* Traffic signs - decorative SVG */}
-        <div className="absolute left-[clamp(10px,calc(50%-360px-10vw),220px)] top-[20%] z-[2] opacity-80 animate-[sway_5s_ease-in-out_infinite]">
-          <svg width="80" height="80" viewBox="0 0 100 100">
+        {/* Traffic signs - decorative SVG. Placed at edges so they never crowd the hero copy. */}
+        {/* Left upper — mandatory direction (blue) */}
+        <div aria-hidden className="absolute left-[clamp(10px,calc(50%-360px-10vw),220px)] top-[18%] z-[2] opacity-80 animate-[sway_5s_ease-in-out_infinite]">
+          <svg width="72" height="72" viewBox="0 0 100 100">
             <circle cx="50" cy="50" r="48" fill="none" stroke="#1a6fc4" strokeWidth="8"/>
             <path d="M30 50 L70 50 M55 35 L70 50 L55 65" stroke="#1a6fc4" strokeWidth="8" strokeLinecap="round" fill="none"/>
           </svg>
         </div>
-        <div className="absolute right-[clamp(10px,calc(50%-360px-10vw),220px)] top-[20%] z-[2] opacity-80 animate-[sway_5s_ease-in-out_infinite_reverse]">
-          <svg width="80" height="80" viewBox="0 0 100 100">
+        {/* Left lower — speed limit 80 (hidden on very small screens to avoid crowding the CTAs) */}
+        <div aria-hidden className="hidden sm:block absolute left-[clamp(10px,calc(50%-360px-6vw),260px)] top-[58%] z-[2] opacity-75 animate-[sway_6s_ease-in-out_infinite_reverse]">
+          <svg width="66" height="66" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="46" fill="#f5f2ec" stroke="#d4191b" strokeWidth="10"/>
+            <text x="50" y="64" textAnchor="middle" fill="#1a1a1a" fontSize="42" fontWeight="bold" fontFamily="Arial, sans-serif">80</text>
+          </svg>
+        </div>
+        {/* Right upper — warning triangle */}
+        <div aria-hidden className="absolute right-[clamp(10px,calc(50%-360px-10vw),220px)] top-[18%] z-[2] opacity-80 animate-[sway_5s_ease-in-out_infinite_reverse]">
+          <svg width="72" height="72" viewBox="0 0 100 100">
             <polygon points="50,4 96,96 4,96" fill="none" stroke="#d4191b" strokeWidth="8"/>
             <text x="50" y="72" textAnchor="middle" fill="#d4191b" fontSize="44" fontWeight="bold">!</text>
+          </svg>
+        </div>
+        {/* Right lower — STOP octagon (hidden on very small screens to avoid crowding the CTAs) */}
+        <div aria-hidden className="hidden sm:block absolute right-[clamp(10px,calc(50%-360px-6vw),260px)] top-[58%] z-[2] opacity-75 animate-[sway_6s_ease-in-out_infinite]">
+          <svg width="66" height="66" viewBox="0 0 100 100">
+            <polygon
+              points="30,4 70,4 96,30 96,70 70,96 30,96 4,70 4,30"
+              fill="#c81b1d"
+              stroke="#f5f2ec"
+              strokeWidth="4"
+            />
+            <text x="50" y="62" textAnchor="middle" fill="#f5f2ec" fontSize="26" fontWeight="bold" fontFamily="Arial, sans-serif" letterSpacing="1">STOP</text>
           </svg>
         </div>
 

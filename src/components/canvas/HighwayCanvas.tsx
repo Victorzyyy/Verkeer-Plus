@@ -76,14 +76,28 @@ export default function HighwayCanvas() {
       }
     }
 
+    // Minimum gap (in CSS px) between two vehicles on the same lane before another may respawn there.
+    const LANE_MIN_GAP = 220
+
     function spawnInitialCars() {
+      // One vehicle per lane, spaced across the visible width — cuts the previous crowd (15) to 5.
       for (let i = 0; i < NUM_LANES; i++) {
-        for (let j = 0; j < 3; j++) {
-          const car = spawnCar(i)
-          car.x = Math.random() * W
-          cars.push(car)
-        }
+        const car = spawnCar(i)
+        car.x = ((i + 0.5) / NUM_LANES) * W + (Math.random() - 0.5) * (W / NUM_LANES) * 0.5
+        cars.push(car)
       }
+    }
+
+    // Returns true if respawning a car in this lane moving in this direction would visually collide
+    // with an existing one still on-screen (or just entering) at the spawn side.
+    function laneEntryBlocked(laneIdx: number, movingRight: boolean): boolean {
+      for (const other of cars) {
+        if (other.laneIdx !== laneIdx) continue
+        if ((other.speed > 0) !== movingRight) continue
+        if (movingRight && other.x < LANE_MIN_GAP) return true
+        if (!movingRight && other.x > W - LANE_MIN_GAP) return true
+      }
+      return false
     }
 
     function drawRoad() {
@@ -216,14 +230,19 @@ export default function HighwayCanvas() {
       cars.sort((a, b) => a.depth - b.depth)
       cars.forEach(car => {
         car.x += car.speed
-        if (car.speed > 0 && car.x > W + 150) {
-          const nc = spawnCar(car.laneIdx)
-          Object.assign(car, nc)
-        } else if (car.speed < 0 && car.x < -150) {
-          const nc = spawnCar(car.laneIdx)
-          Object.assign(car, nc)
+        const goingRight = car.speed > 0
+        const offRight = goingRight && car.x > W + 150
+        const offLeft = !goingRight && car.x < -150
+        if (offRight || offLeft) {
+          // Only respawn once the lane's spawn side has cleared, otherwise this vehicle just waits
+          // one frame off-screen — prevents cars piling on top of each other in the same lane.
+          if (!laneEntryBlocked(car.laneIdx, goingRight)) {
+            const nc = spawnCar(car.laneIdx)
+            Object.assign(car, nc)
+          }
+        } else {
+          drawCar(car)
         }
-        drawCar(car)
       })
 
       if (isVisible && !reduceMotion) {
