@@ -3,6 +3,7 @@ import { Inter, Space_Grotesk, Space_Mono, Noto_Sans_Arabic } from 'next/font/go
 import { LangProvider } from '@/lib/langContext'
 import { siteConfig } from '@/data/content'
 import type { Lang } from '@/types'
+import WhatsAppButton from '@/components/layout/WhatsAppButton'
 import '../globals.css'
 
 const inter = Inter({
@@ -117,13 +118,14 @@ export default function RootLayout({
       dir={dir}
       className={`${inter.variable} ${spaceGrotesk.variable} ${spaceMono.variable} ${notoArabic.variable}`}
     >
-      <body className="bg-bg text-text font-body antialiased">
+      <body className="bg-bg text-muted font-body antialiased">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
         />
         <LangProvider lang={lang}>
           {children}
+          <WhatsAppButton />
         </LangProvider>
       </body>
     </html>

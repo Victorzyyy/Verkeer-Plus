@@ -85,10 +85,10 @@ export default function ContactForm() {
             <p className="text-[14px] text-muted">{t.ctSpoedBody}</p>
           </div>
           <a
-            href={`tel:${siteConfig.phoneEmergency.replace(/\s|—/g, '')}`}
+            href={`tel:${siteConfig.phoneTel}`}
             className="font-mono text-[18px] font-bold text-accent-soft hover:underline whitespace-nowrap"
           >
-            {siteConfig.phoneEmergency}
+            {siteConfig.phone}
           </a>
         </div>
       </div>

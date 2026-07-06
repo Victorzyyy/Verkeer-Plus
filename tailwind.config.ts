@@ -4,10 +4,10 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        bg:       '#141311',
-        raised:   '#1e1d1a',
-        card:     '#242320',
-        concrete: '#2e2c28',
+        bg:       '#0d0c0a',
+        raised:   '#181614',
+        card:     '#1f1d1a',
+        concrete: '#2b2925',
         accent:   '#d4191b',
         'accent-soft': '#e8413f',
         muted:    '#b8b2a6',

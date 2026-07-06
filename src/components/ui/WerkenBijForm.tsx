@@ -62,23 +62,21 @@ export default function WerkenBijForm() {
   }
 
   return (
-    <div className="grid md:grid-cols-[280px_1fr] gap-12 items-start">
+    <div className="flex flex-col gap-10 max-w-[720px] mx-auto">
       {/* Sidebar */}
-      <aside>
-        <div className="bg-raised border border-concrete rounded-xl p-7 md:sticky md:top-20">
-          <h3 className="font-display font-bold text-[16px] text-white mb-5">{t.wbSidebarTitle}</h3>
-          <ul className="space-y-3.5">
-            {fitItems.map((item, i) => (
-              <li key={i} className="flex items-start gap-2.5">
-                <span className="mt-[7px] w-1.5 h-1.5 rounded-full bg-accent flex-shrink-0" />
-                <span className="text-[14px] leading-snug text-muted">{item[lang]}</span>
-              </li>
-            ))}
-          </ul>
-          <p className="mt-5 pt-4 border-t border-concrete text-[13px] text-dim leading-relaxed">
-            {t.wbSidebarNote}
-          </p>
-        </div>
+      <aside className="bg-raised border border-concrete rounded-xl p-7 md:p-8">
+        <h3 className="font-display font-bold text-[16px] text-white mb-5">{t.wbSidebarTitle}</h3>
+        <ul className="space-y-3.5">
+          {fitItems.map((item, i) => (
+            <li key={i} className="flex items-start gap-2.5">
+              <span className="mt-[7px] w-1.5 h-1.5 rounded-full bg-accent flex-shrink-0" />
+              <span className="text-[14px] leading-snug text-muted">{item[lang]}</span>
+            </li>
+          ))}
+        </ul>
+        <p className="mt-5 pt-4 border-t border-concrete text-[13px] text-dim leading-relaxed">
+          {t.wbSidebarNote}
+        </p>
       </aside>
 
       {/* Form */}

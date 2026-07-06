@@ -39,7 +39,7 @@ export default function Header() {
         {/* Logo */}
         <Link
           href={localizedHref('/', lang)}
-          className="font-display font-bold text-[18px] tracking-[0.04em] text-text hover:opacity-80 transition-opacity"
+          className="font-display font-bold text-[18px] tracking-[0.04em] text-white hover:opacity-80 transition-opacity"
         >
           VERKEER<span className="text-accent">S</span>PLUS
         </Link>
@@ -50,7 +50,7 @@ export default function Header() {
             <Link
               key={link.href}
               href={localizedHref(link.href, lang)}
-              className="font-mono text-[11px] uppercase tracking-[0.1em] text-muted hover:text-text transition-colors duration-200"
+              className="font-mono text-[11px] uppercase tracking-[0.1em] text-muted hover:text-white transition-colors duration-200"
             >
               {link[lang]}
             </Link>

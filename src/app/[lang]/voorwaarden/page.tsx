@@ -41,7 +41,7 @@ export default function TermsPage({ params }: { params: { lang: Lang } }) {
                 <div className="space-y-8 text-[15px] leading-relaxed text-muted">
                   <p>
                     تسري هذه الشروط على المهام التي يتم الاتفاق عليها مع {siteConfig.legalName}
-                    (&quot;فيركيرسبلوس&quot;)، ومقرها هولندا، والمسجلة لدى غرفة التجارة تحت الرقم {siteConfig.kvk}.
+                    (&quot;فيركيرسبلوس&quot;)، ومقرها هولندا.
                   </p>
 
                   <div>
@@ -102,7 +102,7 @@ export default function TermsPage({ params }: { params: { lang: Lang } }) {
                 <div className="space-y-8 text-[15px] leading-relaxed text-muted">
                   <p>
                     Deze voorwaarden gelden voor opdrachten die worden afgesloten met {siteConfig.legalName}
-                    (&quot;Verkeersplus&quot;), gevestigd in Nederland en ingeschreven bij de KvK onder nummer {siteConfig.kvk}.
+                    (&quot;Verkeersplus&quot;), gevestigd in Nederland.
                   </p>
 
                   <div>

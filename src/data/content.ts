@@ -1,13 +1,12 @@
-import type { Service, TrustItem, ContactInfo, NavLink, FitItem, FaqItem } from '@/types'
+import type { Service, TrustItem, ContactInfo, NavLink, FitItem } from '@/types'
 
 export const siteConfig = {
   name: 'Verkeersplus',
   legalName: 'Verkeersplus Services B.V.',
-  phone: '085 — XXX XXXX',
-  phoneEmergency: '06 — XXXX XXXX',
+  phone: '+31 6 8725 8236',
+  phoneTel: '+31687258236',
+  phoneWhatsapp: '31687258236',
   email: 'info@verkeersplus.nl',
-  availability: '24/7 — 365 dagen',
-  kvk: 'XX XXX XXX',
   group: 'Pijler Groep',
   baseUrl: 'https://verkeersplus.nl',
 }
@@ -95,11 +94,9 @@ export const trustItems: TrustItem[] = [
 ]
 
 export const contactInfo: ContactInfo[] = [
-  { key: 'phone',        nl: { label: 'Telefoon',  value: '085 — XXX XXXX'     }, ar: { label: 'الهاتف',             value: '085 — XXX XXXX'     }, href: 'tel:085XXXXXXX' },
-  { key: 'emergency',   nl: { label: 'Spoed',     value: '06 — XXXX XXXX'     }, ar: { label: 'الطوارئ',            value: '06 — XXXX XXXX'     }, href: 'tel:06XXXXXXXX' },
-  { key: 'email',       nl: { label: 'E-mail',    value: 'info@verkeersplus.nl' }, ar: { label: 'البريد الإلكتروني', value: 'info@verkeersplus.nl' }, href: 'mailto:info@verkeersplus.nl' },
-  { key: 'available',   nl: { label: 'Bereikbaar', value: '24/7 — 365 dagen'  }, ar: { label: 'التوفر',             value: '24/7 — 365 يوماً'   } },
-  { key: 'kvk',         nl: { label: 'KVK',       value: 'XX XXX XXX'          }, ar: { label: 'رقم الغرفة التجارية', value: 'XX XXX XXX'         } },
+  { key: 'phone', nl: { label: 'Telefoon', value: '+31 6 8725 8236' }, ar: { label: 'الهاتف', value: '+31 6 8725 8236' }, href: 'tel:+31687258236' },
+  { key: 'whatsapp', nl: { label: 'WhatsApp', value: '+31 6 8725 8236' }, ar: { label: 'واتساب', value: '+31 6 8725 8236' }, href: 'https://wa.me/31687258236' },
+  { key: 'email', nl: { label: 'E-mail', value: 'info@verkeersplus.nl' }, ar: { label: 'البريد الإلكتروني', value: 'info@verkeersplus.nl' }, href: 'mailto:info@verkeersplus.nl' },
 ]
 
 export const fitItems: FitItem[] = [
@@ -108,59 +105,6 @@ export const fitItems: FitItem[] = [
   { nl: 'Flexibel bent qua werktijden — ook avond en weekend',                    ar: 'مرناً في أوقات العمل — بما في ذلك المساء وعطلة نهاية الأسبوع' },
   { nl: 'Verantwoordelijkheid neemt voor de veiligheid van anderen',               ar: 'تتحمل المسؤولية عن سلامة الآخرين' },
   { nl: 'Goed Nederlands spreekt (andere talen zijn een plus)',                    ar: 'تتحدث الهولندية جيداً (اللغات الأخرى ميزة إضافية)' },
-]
-
-export const faqItems: FaqItem[] = [
-  {
-    nl: {
-      q: 'Hoe snel kunnen jullie verkeersregelaars leveren?',
-      a: 'In de meeste gevallen binnen 24 uur, door heel Nederland. Bij spoed proberen we nog sneller te schakelen — bel ons direct voor calamiteiten.',
-    },
-    ar: {
-      q: 'ما مدى سرعة توفير منظمي حركة المرور؟',
-      a: 'في معظم الحالات خلال 24 ساعة، في جميع أنحاء هولندا. في حالات الطوارئ نحاول التحرك بشكل أسرع — اتصل بنا مباشرة للطوارئ.',
-    },
-  },
-  {
-    nl: {
-      q: 'Zijn jullie verkeersregelaars gecertificeerd?',
-      a: 'Ja, al onze verkeersregelaars zijn CROW-gecertificeerd en werken volgens de geldende richtlijnen voor verkeersregeling in Nederland.',
-    },
-    ar: {
-      q: 'هل منظمو حركة المرور لديكم معتمدون؟',
-      a: 'نعم، جميع منظمي حركة المرور لدينا معتمدون من CROW ويعملون وفق المعايير المعتمدة لتنظيم حركة المرور في هولندا.',
-    },
-  },
-  {
-    nl: {
-      q: 'Wat kost het inhuren van een verkeersregelaar?',
-      a: 'Dat hangt af van locatie, duur en het aantal verkeersregelaars dat nodig is. Vraag een vrijblijvende offerte aan via het contactformulier — we reageren binnen 2 uur.',
-    },
-    ar: {
-      q: 'كم تكلفة استئجار منظم حركة مرور؟',
-      a: 'تعتمد التكلفة على الموقع والمدة وعدد منظمي حركة المرور المطلوبين. اطلب عرض أسعار مجاني عبر نموذج التواصل — نرد خلال ساعتين.',
-    },
-  },
-  {
-    nl: {
-      q: 'Kan ik ook terecht voor een last-minute spoedklus?',
-      a: 'Ja. We zijn 24/7 bereikbaar voor calamiteiten en spoedaanvragen en leveren binnen de kortst mogelijke tijd verkeersregelaars op locatie.',
-    },
-    ar: {
-      q: 'هل يمكنني التواصل لطلب عاجل في اللحظة الأخيرة؟',
-      a: 'نعم. نحن متاحون على مدار الساعة طوال أيام الأسبوع للطوارئ والطلبات العاجلة، ونوفر منظمي حركة مرور في الموقع في أسرع وقت ممكن.',
-    },
-  },
-  {
-    nl: {
-      q: 'In welke regio’s zijn jullie actief?',
-      a: 'We zijn landelijk actief, van Groningen tot Zeeland, en plannen verkeersregelaars in door het hele land.',
-    },
-    ar: {
-      q: 'في أي مناطق أنتم نشطون؟',
-      a: 'نحن نعمل على مستوى هولندا بأكملها، من خرونينغن إلى زيلاند، وننظم منظمي حركة مرور في جميع أنحاء البلاد.',
-    },
-  },
 ]
 
 export const ui = {
@@ -194,9 +138,7 @@ export const ui = {
     bannerTitle: 'Zelf verkeersregelaar worden?',
     bannerBody: 'Via onze opleidingspartner haal je je certificering en sta je snel inzetbaar op de weg.',
     bannerBtn: 'Solliciteer direct',
-    faqEyebrow: '// 004 — Veelgestelde vragen',
-    faqTitle: 'Veelgestelde vragen',
-    contactEyebrow: '// 005 — Contact',
+    contactEyebrow: '// 004 — Contact',
     contactTitle: 'Direct een team nodig?',
     contactBody: 'Neem contact op voor een vrijblijvende offerte of bel direct voor spoedaanvragen. Wij reageren binnen 2 uur.',
     contactBtn: 'Offerte aanvragen',
@@ -284,9 +226,7 @@ export const ui = {
     bannerTitle: 'هل تريد أن تصبح منظم حركة مرور؟',
     bannerBody: 'من خلال شريكنا التعليمي، يمكنك الحصول على الشهادة والبدء بالعمل بسرعة.',
     bannerBtn: 'قدّم طلبك الآن',
-    faqEyebrow: '// 004 — الأسئلة الشائعة',
-    faqTitle: 'الأسئلة الشائعة',
-    contactEyebrow: '// 005 — تواصل معنا',
+    contactEyebrow: '// 004 — تواصل معنا',
     contactTitle: 'تحتاج فريقاً فوراً؟',
     contactBody: 'تواصل معنا للحصول على عرض أسعار مجاني أو اتصل مباشرة للطلبات العاجلة. نرد خلال ساعتين.',
     contactBtn: 'طلب عرض أسعار',
