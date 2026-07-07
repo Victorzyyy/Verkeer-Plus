@@ -17,7 +17,6 @@ export default function Services() {
         <div className="mb-10 grid gap-5 md:grid-cols-[0.9fr_1.1fr] md:items-end">
           <div>
             <span className="stripe" />
-            <p className="eyebrow">{t.servicesEyebrow}</p>
             <h2 className="font-display font-bold text-[clamp(28px,5vw,52px)] leading-[0.98] text-white">
               {t.servicesTitle}
             </h2>
@@ -30,18 +29,13 @@ export default function Services() {
         </div>
 
         <div className="grid gap-4 lg:grid-cols-3">
-          {services.map((service, index) => {
+          {services.map((service) => {
             const svc = service[lang]
             return (
               <article key={service.id} className="vp-service-card group">
-                <div className="flex items-center justify-between gap-4">
-                  <span className="font-mono text-[12px] font-bold uppercase tracking-[0.12em] text-accent-soft">
-                    Route {String(index + 1).padStart(2, '0')}
-                  </span>
-                  <span className="h-2.5 w-2.5 rounded-full bg-accent shadow-[0_0_16px_rgba(212,25,27,0.8)]" />
-                </div>
+                <span className="block h-2.5 w-2.5 rounded-full bg-accent shadow-[0_0_16px_rgba(212,25,27,0.8)]" />
 
-                <h3 className="mt-8 font-display text-[clamp(22px,2.45vw,30px)] font-bold leading-[1.04] text-white [overflow-wrap:anywhere]">
+                <h3 className="mt-7 font-display text-[clamp(22px,2.45vw,30px)] font-bold leading-[1.04] text-white [overflow-wrap:anywhere]">
                   {svc.title}
                 </h3>
                 <p className="mt-4 min-h-[8rem] text-[15px] leading-relaxed text-white/82">

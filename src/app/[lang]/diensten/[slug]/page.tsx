@@ -7,7 +7,10 @@ import ServiceContent from './ServiceContent'
 import type { Lang } from '@/types'
 
 export function generateStaticParams() {
-  return services.map(s => ({ slug: s.id }))
+  return services.flatMap(service => [
+    { lang: 'nl', slug: service.id },
+    { lang: 'ar', slug: service.id },
+  ])
 }
 
 export function generateMetadata({ params }: { params: { lang: Lang; slug: string } }): Metadata {
