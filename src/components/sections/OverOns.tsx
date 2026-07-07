@@ -9,7 +9,7 @@ export default function OverOns() {
   const t = useT()
 
   return (
-    <section id="over-ons" className="relative py-24 overflow-hidden bg-raised">
+    <section id="over-ons" className="relative py-24 overflow-hidden bg-bg">
       {/* Ghost word */}
       <div aria-hidden className="ghost-word">
         {lang === 'nl' ? 'VEILIGHEID' : 'السلامة'}
@@ -22,17 +22,17 @@ export default function OverOns() {
           {t.trustTitle}
         </h2>
 
-        {/* Full-width barriers image */}
-        <div className="relative w-full overflow-hidden border border-concrete mb-12" style={{ maxHeight: 380 }}>
+        {/* Team photo — full width, bleeds edge-to-edge on mobile */}
+        <div className="relative -mx-6 md:-mx-12 mb-14 overflow-hidden" style={{ maxHeight: 420 }}>
           <Image
-            src="/images/barriers.jpg"
-            alt={lang === 'nl' ? 'Professionele wegafzetting met barriers' : 'حواجز طريق احترافية'}
-            width={1376}
-            height={768}
-            className="w-full object-cover"
-            style={{ maxHeight: 380, objectFit: 'cover' }}
+            src="/images/verkeerplus-car.jpg"
+            alt={lang === 'nl' ? 'VerkeerPlus verkeersregelaar met dienstvoertuig' : 'منظم مرور فيركيرسبلوس مع مركبة الخدمة'}
+            width={1080}
+            height={1080}
+            className="w-full object-cover object-top"
+            style={{ maxHeight: 420 }}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-raised/40 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-bg/60 to-transparent" />
         </div>
 
         {/* Trust items */}
