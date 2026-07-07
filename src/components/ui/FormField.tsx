@@ -126,7 +126,15 @@ export function FileUpload({ id, name, accept, label, hint, fileName, error, onC
             <line x1="12" y1="3" x2="12" y2="15"/>
           </svg>
         </div>
-        <p className="text-[13px] text-dim leading-snug" dangerouslySetInnerHTML={{ __html: hint.replace('PDF, DOC', '<strong class="text-muted">PDF, DOC</strong>') }} />
+        <p className="text-[13px] text-dim leading-snug">
+          {hint.includes('PDF, DOC') ? (
+            <>
+              {hint.split('PDF, DOC')[0]}
+              <strong className="text-muted">PDF, DOC</strong>
+              {hint.split('PDF, DOC')[1]}
+            </>
+          ) : hint}
+        </p>
       </label>
       {fileName && <p className="text-[13px] text-green-500 mt-1.5">✓ {fileName}</p>}
       {error && <p className="text-[12px] text-accent-soft mt-1">{error}</p>}
@@ -136,10 +144,10 @@ export function FileUpload({ id, name, accept, label, hint, fileName, error, onC
 
 interface FormMessageProps {
   type: 'success' | 'error' | null
-  html?: string
+  message?: React.ReactNode
 }
-export function FormMessage({ type, html }: FormMessageProps) {
-  if (!type || !html) return null
+export function FormMessage({ type, message }: FormMessageProps) {
+  if (!type || !message) return null
   return (
     <div
       className={`mt-4 px-4 py-3.5 rounded-md text-[14px] leading-relaxed ${
@@ -147,7 +155,8 @@ export function FormMessage({ type, html }: FormMessageProps) {
           ? 'bg-green-500/10 border border-green-500/30 text-green-400'
           : 'bg-accent/10 border border-accent/30 text-accent-soft'
       }`}
-      dangerouslySetInnerHTML={{ __html: html }}
-    />
+    >
+      {message}
+    </div>
   )
 }

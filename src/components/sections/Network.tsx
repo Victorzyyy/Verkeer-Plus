@@ -6,39 +6,29 @@ export default function Network() {
   const t = useT()
 
   return (
-    <section className="relative py-24 overflow-hidden">
-      {/* Road asphalt bg */}
-      <div
-        className="absolute inset-0 z-0"
-        style={{
-          backgroundImage: 'url(/images/road-bg.webp)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          filter: 'blur(2px) brightness(0.32)',
-          transform: 'scale(1.05)',
-        }}
-      />
+    <section className="relative overflow-hidden bg-bg py-20 sm:py-24">
+      <div aria-hidden className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent to-transparent opacity-70" />
+      <div aria-hidden className="absolute left-[-14rem] top-8 h-96 w-96 rounded-full bg-accent/10 blur-3xl" />
+      <div aria-hidden className="absolute right-[-10rem] bottom-10 h-72 w-72 rounded-full bg-accent/8 blur-3xl" />
 
-      <div className="relative z-10 max-w-[1120px] mx-auto px-6 md:px-12">
-        <span className="stripe" />
-        <p className="eyebrow">{t.networkEyebrow}</p>
+      <div className="relative z-10 mx-auto max-w-[1120px] px-6 md:px-12">
+        <div className="max-w-[820px]">
+          <span className="stripe" />
+          <p className="eyebrow">{t.networkEyebrow}</p>
 
-        <h2
-          className="font-display font-bold text-[clamp(26px,4vw,38px)] mb-5 leading-[1.2] tracking-[-0.01em] max-w-[600px]"
-          style={{ textShadow: '0 2px 12px rgba(0,0,0,0.7), 0 0 40px rgba(0,0,0,0.4)' }}
-        >
-          <span className="text-accent">{t.networkTitleRed}</span>{' '}
-          <span className="text-white">{t.networkTitleWhite}</span>
-        </h2>
+          <h2 className="mb-5 max-w-[680px] font-display text-[clamp(30px,5vw,58px)] font-bold leading-[0.98] tracking-[-0.01em]">
+            <span className="text-accent">{t.networkTitleRed}</span>{' '}
+            <span className="text-white">{t.networkTitleWhite}</span>
+          </h2>
 
-        <p
-          className="text-[clamp(15.5px,1.6vw,17px)] font-medium leading-[1.9] max-w-[640px] text-white/95"
-          style={{ textShadow: '0 2px 10px rgba(0,0,0,0.85), 0 0 24px rgba(0,0,0,0.6)' }}
-        >
-          {t.networkBody.split(t.networkBodyBold)[0]}
-          <strong className="text-white font-semibold">{t.networkBodyBold}</strong>
-          {t.networkBody.split(t.networkBodyBold)[1]}
-        </p>
+          <div className="network-story max-w-[720px]">
+            <p className="text-[clamp(16px,1.7vw,18px)] font-semibold leading-[1.9] text-white">
+              {t.networkBody.split(t.networkBodyBold)[0]}
+              <strong className="network-story-highlight">{t.networkBodyBold}</strong>
+              {t.networkBody.split(t.networkBodyBold)[1]}
+            </p>
+          </div>
+        </div>
       </div>
     </section>
   )

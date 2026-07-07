@@ -76,13 +76,18 @@ export default function LightStreakDivider() {
 
       // Dashed center line
       ctx!.save()
-      ctx!.globalAlpha = 0.08
+      ctx!.globalAlpha = 0.22
       ctx!.setLineDash([28, 18])
       ctx!.strokeStyle = '#fff'
-      ctx!.lineWidth = 1
+      ctx!.lineWidth = 1.35
       ctx!.beginPath()
       ctx!.moveTo(0, H / 2)
       ctx!.lineTo(W, H / 2)
+      ctx!.stroke()
+
+      // Subtle glow so the lane marking reads more clearly against the asphalt.
+      ctx!.globalAlpha = 0.1
+      ctx!.lineWidth = 4
       ctx!.stroke()
       ctx!.restore()
 

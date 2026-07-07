@@ -11,7 +11,7 @@ export default function ContactForm() {
   const t = useT()
   const { lang } = useLang()
   const [submitting, setSubmitting] = useState(false)
-  const [message, setMessage] = useState<{ type: 'success' | 'error'; html: string } | null>(null)
+  const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null)
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -23,11 +23,11 @@ export default function ContactForm() {
     const bericht = (data.get('bericht') as string).trim()
 
     if (!naam || !email || !tel || !bericht) {
-      setMessage({ type: 'error', html: t.ctError })
+      setMessage({ type: 'error', text: t.ctError })
       return
     }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      setMessage({ type: 'error', html: t.wbEmailError })
+      setMessage({ type: 'error', text: t.wbEmailError })
       return
     }
     setSubmitting(true)
@@ -37,10 +37,10 @@ export default function ContactForm() {
     })
     setSubmitting(false)
     if (result.ok) {
-      setMessage({ type: 'success', html: t.ctSuccess })
+      setMessage({ type: 'success', text: t.ctSuccess })
       form.reset()
     } else {
-      setMessage({ type: 'error', html: t.ctSubmitError })
+      setMessage({ type: 'error', text: t.ctSubmitError })
     }
   }
 
@@ -146,7 +146,7 @@ export default function ContactForm() {
             <p className="text-[12px] text-dim max-w-[220px]">{t.ctNote}</p>
           </div>
 
-          <FormMessage type={message?.type ?? null} html={message?.html} />
+          <FormMessage type={message?.type ?? null} message={message?.text} />
         </form>
       </div>
     </div>

@@ -3,7 +3,6 @@
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import { useLang, useT } from '@/lib/langContext'
-import { localizedHref } from '@/lib/localizedHref'
 
 const LightStreakDivider = dynamic(() => import('@/components/canvas/LightStreakDivider'), { ssr: false })
 
@@ -13,8 +12,7 @@ export default function Hero() {
 
   return (
     <>
-      <section className="relative min-h-[68vh] flex flex-col overflow-hidden bg-bg">
-        {/* No blur — let the photo read as a photo. Brightness + gradients do the readability work. */}
+      <section className="vp-hero relative overflow-hidden bg-bg">
         <div className="absolute inset-0 z-0 overflow-hidden">
           <Image
             src="/images/road-bg.webp"
@@ -22,47 +20,31 @@ export default function Hero() {
             fill
             priority
             className="object-cover object-center"
-            style={{ filter: 'brightness(0.42)' }}
+            style={{ filter: 'brightness(0.55) saturate(0.9)' }}
             sizes="100vw"
           />
-          {/* Top vignette (nav area) + bottom blend into next section */}
-          <div className="absolute inset-0 bg-gradient-to-b from-bg/65 via-transparent to-bg" />
-          {/* Soft left wash so centered text has extra contrast regardless of photo content */}
-          <div className="absolute inset-0 bg-gradient-to-r from-bg/40 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(212,25,27,0.22),transparent_28%),linear-gradient(90deg,rgba(13,12,10,0.98)_0%,rgba(13,12,10,0.9)_48%,rgba(13,12,10,0.42)_100%)]" />
+          <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-bg to-transparent" />
         </div>
 
-        {/* Two signs — enough traffic context, not visual noise */}
-        <div aria-hidden className="absolute left-[clamp(16px,calc(50%-380px-5vw),200px)] top-[15%] z-[2] opacity-65 animate-[sway_5s_ease-in-out_infinite]">
-          <svg width="66" height="66" viewBox="0 0 100 100">
-            <circle cx="50" cy="50" r="48" fill="none" stroke="#1a6fc4" strokeWidth="8"/>
-            <path d="M30 50 L70 50 M55 35 L70 50 L55 65" stroke="#1a6fc4" strokeWidth="8" strokeLinecap="round" fill="none"/>
-          </svg>
-        </div>
-        <div aria-hidden className="hidden sm:block absolute right-[clamp(16px,calc(50%-380px-5vw),200px)] top-[20%] z-[2] opacity-60 animate-[sway_6s_ease-in-out_infinite_reverse]">
-          <svg width="60" height="60" viewBox="0 0 100 100">
-            <polygon points="30,4 70,4 96,30 96,70 70,96 30,96 4,70 4,30" fill="#c81b1d" stroke="#f5f2ec" strokeWidth="4"/>
-            <text x="50" y="62" textAnchor="middle" fill="#f5f2ec" fontSize="26" fontWeight="bold" fontFamily="Arial, sans-serif" letterSpacing="1">STOP</text>
-          </svg>
-        </div>
-
-        {/* Hero content */}
-        <div className="relative z-[3] flex-1 flex items-center justify-center text-center px-6 pt-20 pb-16">
+        <div className="relative z-[3] mx-auto flex min-h-[calc(100vh-62px)] max-w-[1180px] items-center px-5 py-10 md:px-8 lg:px-10">
           <div className="max-w-3xl">
-            <h1 className="font-display font-bold text-[clamp(27px,5.6vw,43px)] text-white leading-[1.15] mb-6"
-                style={{ textShadow: '0 2px 24px rgba(0,0,0,0.9)' }}>
+            <div className="mb-6 inline-flex items-center gap-3 border border-white/15 bg-bg/70 px-3 py-2 font-mono text-[11px] uppercase tracking-[0.12em] text-muted backdrop-blur">
+              <span className="h-2 w-2 rounded-full bg-accent shadow-[0_0_18px_rgba(212,25,27,0.9)]" />
+              {lang === 'nl' ? 'Dispatch actief · landelijke inzet' : 'التنسيق نشط · تغطية وطنية'}
+            </div>
+
+            <h1 className="font-display text-[clamp(34px,7vw,78px)] font-black leading-[0.94] text-white">
               {t.heroTitle}{' '}
               <span className="text-accent">{t.heroTitleHighlight}</span>{' '}
               {t.heroTitleEnd}
             </h1>
-            <p className="text-[17px] text-muted leading-relaxed max-w-xl mx-auto mb-10"
-               style={{ textShadow: '0 1px 10px rgba(0,0,0,0.8)' }}>
+            <p className="mt-6 max-w-2xl text-[clamp(16px,1.8vw,19px)] leading-[1.75] text-white/82">
               {t.heroSub}
             </p>
-            <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
-              <a href={localizedHref('/contact', lang)} className="btn-primary">
-                {t.contactBtn}
-              </a>
-              <a href="#over-ons" className="font-mono text-[13px] uppercase tracking-[0.08em] text-white/80 hover:text-white transition-colors">
+
+            <div className="mt-8 flex flex-wrap items-center gap-3">
+              <a href="#over-ons" className="hero-over-link">
                 {t.heroBtn} →
               </a>
             </div>

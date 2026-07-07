@@ -16,7 +16,7 @@ export default function WerkenBijForm() {
   const [pas, setPas] = useState('nee')
   const [cvFile, setCvFile] = useState<File | null>(null)
   const [submitting, setSubmitting] = useState(false)
-  const [message, setMessage] = useState<{ type: 'success' | 'error'; html: string } | null>(null)
+  const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null)
   const [fileError, setFileError] = useState('')
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
@@ -30,11 +30,16 @@ export default function WerkenBijForm() {
     const plaats = (data.get('woonplaats') as string).trim()
 
     if (!naam || !tel || !email || !plaats) {
-      setMessage({ type: 'error', html: t.wbError })
+      setMessage({ type: 'error', text: t.wbError })
       return
     }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      setMessage({ type: 'error', html: t.wbEmailError })
+      setMessage({ type: 'error', text: t.wbEmailError })
+      return
+    }
+    const attachment = data.get('attachment')
+    if (attachment instanceof File && attachment.size > 5 * 1024 * 1024) {
+      setFileError(t.wbFileTooLarge)
       return
     }
 
@@ -44,11 +49,11 @@ export default function WerkenBijForm() {
     })
     setSubmitting(false)
     if (result.ok) {
-      setMessage({ type: 'success', html: t.wbSuccess })
+      setMessage({ type: 'success', text: t.wbSuccess })
       form.reset()
       setCvFile(null)
     } else {
-      setMessage({ type: 'error', html: t.wbSubmitError })
+      setMessage({ type: 'error', text: t.wbSubmitError })
     }
   }
 
@@ -206,7 +211,7 @@ export default function WerkenBijForm() {
             <p className="text-[12px] text-dim max-w-[260px]">{t.wbPrivacy}</p>
           </div>
 
-          <FormMessage type={message?.type ?? null} html={message?.html} />
+          <FormMessage type={message?.type ?? null} message={message?.text} />
         </form>
       </div>
     </div>

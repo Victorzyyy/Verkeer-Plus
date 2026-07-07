@@ -9,23 +9,24 @@ export default function BecomeSteward() {
   const t = useT()
 
   return (
-    <section className="py-20 sm:py-24">
-      <div className="max-w-[720px] mx-auto px-6 md:px-12 text-center">
-        <span className="font-mono text-[11px] tracking-[0.14em] uppercase text-accent-soft">
-          {lang === 'nl' ? '// Voor sollicitanten' : '// للمتقدمين'}
-        </span>
-        <h2 className="mt-4 font-display font-bold text-[clamp(22px,4vw,32px)] leading-[1.2] text-white">
-          {t.bannerTitle}
-        </h2>
-        <p className="mt-4 text-[15px] leading-relaxed text-muted">
-          {t.bannerBody}
-        </p>
-        <Link
-          href={localizedHref('/werken-bij', lang)}
-          className="mt-8 inline-block font-mono text-[13px] uppercase tracking-[0.1em] text-white border-b border-accent pb-1 hover:text-accent-soft transition-colors"
-        >
-          {t.bannerBtn} →
-        </Link>
+    <section className="py-16 sm:py-20">
+      <div className="mx-auto max-w-[1120px] px-6 md:px-12">
+        <div className="grid gap-6 border border-concrete bg-card p-5 sm:p-7 md:grid-cols-[1fr_auto] md:items-center">
+          <div>
+            <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-accent-soft">
+              {lang === 'nl' ? '// Voor sollicitanten' : '// للمتقدمين'}
+            </span>
+            <h2 className="mt-3 font-display text-[clamp(24px,4vw,40px)] font-bold leading-[1.05] text-white">
+              {t.bannerTitle}
+            </h2>
+            <p className="mt-4 max-w-2xl text-[15px] leading-relaxed text-white/82">
+              {t.bannerBody}
+            </p>
+          </div>
+          <Link href={localizedHref('/werken-bij', lang)} className="btn-outline">
+            {t.bannerBtn} →
+          </Link>
+        </div>
       </div>
     </section>
   )

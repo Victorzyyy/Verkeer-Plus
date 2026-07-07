@@ -10,8 +10,8 @@ const config: Config = {
         concrete: '#2b2925',
         accent:   '#d4191b',
         'accent-soft': '#e8413f',
-        muted:    '#b8b2a6',
-        dim:      '#8f8a80',
+        muted:    '#d8d1c4',
+        dim:      '#a9a195',
       },
       fontFamily: {
         display: ['var(--font-display)', 'sans-serif'],
