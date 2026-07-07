@@ -33,7 +33,7 @@ export default function OverOns() {
         <div className="grid gap-5 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:items-stretch">
           <div className="vp-trust-photo relative min-h-[360px] overflow-hidden border border-white/12 bg-bg">
             <Image
-              src="/images/verkeerplus-car.jpg.webp"
+              src="/images/verkeerplus-car.webp"
               alt={lang === 'nl' ? 'VerkeerPlus verkeersregelaar met dienstvoertuig' : 'منظم مرور فيركيرسبلوس مع مركبة الخدمة'}
               width={1376}
               height={768}
